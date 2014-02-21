@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour
 		public GameObject bird7;
 		public GameObject bird8;
 		public int birdInFront;
+		public GameObject position0;
 		public GameObject position1;
 		public GameObject position2;
 		public GameObject position3;
@@ -24,10 +25,11 @@ public class Manager : MonoBehaviour
 		public GameObject position6;
 		public GameObject position7;
 		public GameObject position8;
-		public GameObject position9;
 		public float time;
 		public float secondsBetweenHealthChange = 5;
 		public List<GameObject> birds = new List<GameObject> ();
+		public List<GameObject> availablePositions = new List<GameObject> ();
+
 
 		// Use this for initialization
 		void Start ()
@@ -42,6 +44,15 @@ public class Manager : MonoBehaviour
 				birds.Add (bird6);
 				birds.Add (bird7);
 				birds.Add (bird8);
+				availablePositions.Add (position0);
+				availablePositions.Add (position1);
+				availablePositions.Add (position2);
+				availablePositions.Add (position3);
+				availablePositions.Add (position4);
+				availablePositions.Add (position5);
+				availablePositions.Add (position6);
+				availablePositions.Add (position7);
+				availablePositions.Add (position8);
 		}
 	
 		// Update is called once per frame
@@ -78,6 +89,7 @@ public class Manager : MonoBehaviour
 		{
 				birds.Remove (bird);
 				print ("removed bird");
+				availablePositions.Remove (availablePositions [spotVacated]);
 		}
 	
 		public void MoveBirdToBack (int vacatedPosition)
