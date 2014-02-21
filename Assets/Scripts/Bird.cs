@@ -100,6 +100,13 @@ public class Bird : MonoBehaviour
 				birdPosition = newPosition;
 		}
 
+		void OnTriggerEnter (Collider otherCollider)
+		{
+				if (otherCollider.tag.Equals ("Hazard")) {
+						Debug.Log ("Hit hazard");
+						Destroy (gameObject);
+				}
+		}
 		//Begin Health Management System
 
 		public void ChangeHealth ()
