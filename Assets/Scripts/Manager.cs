@@ -76,6 +76,8 @@ public class Manager : MonoBehaviour
 		public void MoveBirdToFront (int birdToMoveForward, int spotVacated)
 		{
 				if (birdToMoveForward != 4) {
+						print ("bird to move forward: " + birdToMoveForward);
+						print ("spot vacated: " + spotVacated);
 						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (birdToMoveForward + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 				} else {
 						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
@@ -87,10 +89,50 @@ public class Manager : MonoBehaviour
 
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
+				//Remove dead bird from birds List
 				birds.Remove (bird);
-				print ("removed bird");
-				availablePositions.Remove (availablePositions [spotVacated]);
+
+				//Check to see how many birds remain in list and remove positions according to pattern 
+				//so that the positions at the rear are removed first and that the positions on the left are removed before positions on the right
+
+				if (birds.Count == 8) {
+						availablePositions.Remove (position0);
+				}
+				if (birds.Count == 7) {
+						availablePositions.Remove (position8);
+				}
+				if (birds.Count == 6) {
+						availablePositions.Remove (position1);
+				}
+				if (birds.Count == 5) {
+						availablePositions.Remove (position7);
+				}
+				if (birds.Count == 4) {
+						availablePositions.Remove (position2);
+				}
+				if (birds.Count == 3) {
+						availablePositions.Remove (position6);
+				}
+				if (birds.Count == 2) {
+						availablePositions.Remove (position3);
+				}
+				if (birds.Count == 1) {
+						availablePositions.Remove (position5);
+				}
+				//for each bird that still exists in the list, 
+				for (int i=0; i<birds.Count; i++) {
+						if (availablePositions [i] != null) {
+								iTween.MoveTo (birds [i].gameObject, iTween.Hash ("position", availablePositions [i].transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+								birds [i].GetComponent<Bird> ().SetPosition (availablePositions [i].GetComponent<Position> ().positionNumber);
+						}
+						if (availablePositions [i] == position4) {
+								birdInFront = birds [i].GetComponent<Bird> ().birdNumber;
+						}
+				}
+		
 		}
+	
+	
 	
 		public void MoveBirdToBack (int vacatedPosition)
 		{

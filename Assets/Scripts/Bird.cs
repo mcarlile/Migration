@@ -108,7 +108,6 @@ public class Bird : MonoBehaviour
 		void OnTriggerEnter (Collider otherCollider)
 		{
 				if (otherCollider.tag.Equals ("Hazard")) {
-						Debug.Log ("Hit hazard");
 						SendDeathData ();
 						Destroy (gameObject);
 				}
