@@ -27,7 +27,7 @@ public class Manager : MonoBehaviour
 		public GameObject position9;
 		public float time;
 		public float secondsBetweenHealthChange = 5;
-		List<GameObject> birds = new List<GameObject> ();
+		public List<GameObject> birds = new List<GameObject> ();
 
 		// Use this for initialization
 		void Start ()
@@ -67,14 +67,17 @@ public class Manager : MonoBehaviour
 				if (birdToMoveForward != 4) {
 						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (birdToMoveForward + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 				} else {
-//						if (spotVacated = 0) {
 						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-//						}
-						//iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("position", position5.transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 				}
 				MoveBirdToBack (spotVacated);
 				birdInFront = birdToMoveForward;
 				birds [birdToMoveForward].GetComponent<Bird> ().SetPosition (4);
+		}
+
+		public void DestroyBird (GameObject bird, int spotVacated)
+		{
+				birds.Remove (bird);
+				print ("removed bird");
 		}
 	
 		public void MoveBirdToBack (int vacatedPosition)
