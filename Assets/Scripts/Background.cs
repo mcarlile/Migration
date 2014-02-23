@@ -5,7 +5,7 @@ public class Background : MonoBehaviour
 {
 
 		private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
-		public float movementSpeed = 1f;
+		public float movementSpeed = 0.1f;
 
 		// Use this for initialization
 		void Start ()
