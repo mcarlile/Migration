@@ -33,6 +33,10 @@ public class Manager : MonoBehaviour
 		public List<GameObject> availablePositions = new List<GameObject> ();
 		public int birdIndex;
 		public GameObject indexBird;
+		public AudioClip dead;
+		public GameObject gameOver;
+		public GameObject flockAudio;
+
 
 
 		// Use this for initialization
@@ -74,8 +78,14 @@ public class Manager : MonoBehaviour
 						time = 0;
 				}
 
-
 				indexBird = GameObject.Find ("bird" + birdIndex);
+
+				if (birds.Count == 1) {
+						flockAudio.SetActive (false);
+				}
+				if (birds.Count == 0) {
+						gameOver.SetActive (true);
+				}
 		}
 
 		void ChangeHealth ()
@@ -102,6 +112,8 @@ public class Manager : MonoBehaviour
 				MoveBirdToBack (bird, spotVacated);
 				birdToMoveBack = bird;
 				birdInFront = birdIndex;
+
+
 				
 		}
 
@@ -126,6 +138,8 @@ public class Manager : MonoBehaviour
 
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
+				audio.PlayOneShot (dead, 1);
+
 				//Remove dead bird from birds List
 				birds.Remove (bird);
 

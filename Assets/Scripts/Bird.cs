@@ -82,6 +82,13 @@ public class Bird : MonoBehaviour
 				} else {
 						health1.SetActive (true);
 				}
+
+				if (health <= 0) {
+						print ("bird has died because it was too weak to fly");
+						SendDeathData ();
+						Destroy (gameObject);
+				}
+
 		}
 	
 		void OnMouseOver ()
@@ -126,8 +133,9 @@ public class Bird : MonoBehaviour
 				if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
 						health = health - 0.5;
 				}
+				if (birdPosition == 4) {
 
-				if ((birdPosition == 4) && (health >= 2)) {
+//				if ((birdPosition == 4) && (health >= 2)) {
 						health = health - 1;
 				}
 				ChangeHealthMeterColor ();
@@ -143,6 +151,7 @@ public class Bird : MonoBehaviour
 				if (otherCollider.tag.Equals ("Hazard")) {
 						SendDeathData ();
 						Destroy (gameObject);
+
 				}
 		}
 
