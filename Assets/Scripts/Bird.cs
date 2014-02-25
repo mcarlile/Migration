@@ -19,6 +19,8 @@ public class Bird : MonoBehaviour
 		public GameObject health5;
 		public GameObject health6;
 		public GameObject health7;
+		public AudioClip startled;
+		public AudioClip dead;
 	
 	
 		// Use this for initialization
@@ -33,7 +35,7 @@ public class Bird : MonoBehaviour
 				health5.renderer.material.SetColor ("_Color", healthHigh);
 				health6.renderer.material.SetColor ("_Color", healthHigh);
 				health7.renderer.material.SetColor ("_Color", healthHigh);
-		
+
 		}
 	
 		// Update is called once per frame
@@ -86,7 +88,9 @@ public class Bird : MonoBehaviour
 		{
 				gameObject.renderer.material.SetColor ("_Color", highlightedColor);
 				if ((Input.GetMouseButtonDown (0))) {
-						manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
+						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
+						manager.GetComponent<Manager> ().MoveBirdToFront (this, birdPosition);
+						audio.PlayOneShot (startled, 1);
 				}
 		}
 
@@ -128,6 +132,20 @@ public class Bird : MonoBehaviour
 				}
 				ChangeHealthMeterColor ();
 		}
+
+		void SendDeathData ()
+		{
+				manager.GetComponent<Manager> ().DestroyBird (gameObject, birdPosition);
+				
+		}
+		void OnTriggerEnter (Collider otherCollider)
+		{
+				if (otherCollider.tag.Equals ("Hazard")) {
+						SendDeathData ();
+						Destroy (gameObject);
+				}
+		}
+
 
 		public void ChangeHealthMeterColor ()
 		{
