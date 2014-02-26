@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Bird.cs">
     <Files>
-      <File FileName="Assets/Scripts/Bird.cs" Line="102" Column="27" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="186" Column="1" />
+      <File FileName="Assets/Scripts/Bird.cs" Line="122" Column="26" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="119" Column="18" />
       <File FileName="Assets/Plugins/iTween.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

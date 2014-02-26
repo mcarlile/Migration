@@ -84,7 +84,6 @@ public class Bird : MonoBehaviour
 				}
 
 				if (health <= 0) {
-						print ("bird has died because it was too weak to fly");
 						SendDeathData ();
 						Destroy (gameObject);
 				}
@@ -120,23 +119,23 @@ public class Bird : MonoBehaviour
 				//the front or the back, the more extreme the change
 
 				if (((birdPosition == 0) || (birdPosition == 8)) && (health <= 5)) {
-						health = health + 1;
+						health = health + 2;
 				}
 
 				if (((birdPosition == 1) || (birdPosition == 7)) && (health <= 5)) {
-						health = health + 0.5;
+						health = health + 1;
 				}
 
 				if (((birdPosition == 2) || (birdPosition == 6)) && (health <= 5)) {
 				}
 
 				if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
-						health = health - 0.5;
+						health = health + 0.7;
 				}
 				if (birdPosition == 4) {
 
 //				if ((birdPosition == 4) && (health >= 2)) {
-						health = health - 1;
+						health = health - 0.5;
 				}
 				ChangeHealthMeterColor ();
 		}
