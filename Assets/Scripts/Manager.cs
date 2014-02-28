@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -97,7 +97,7 @@ public class Manager : MonoBehaviour
 				if (birds.Count == 0) {
 						gameOver.SetActive (true);
 						waitTimer = waitTimer + Time.deltaTime;
-						float waitTextTime = 10 - waitTimer;
+						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
 								print ("newlevelshouldappear");

@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{836BB780-68F7-51B9-D3CB-D6C0D8236B49}</ProjectGuid>
+	<ProjectGuid>{10476121-65AB-8FAA-68E7-9B88BA54B665}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,22 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Bird.cs" />
-     <Compile Include="Assets\Scripts\A_Bird.cs" />
-     <Compile Include="Assets\Scripts\A_Flock.cs" />
-     <Compile Include="Assets\Scripts\Background.cs" />
-     <Compile Include="Assets\Scripts\Flock.cs" />
-     <Compile Include="Assets\Scripts\Letter.cs" />
-     <Compile Include="Assets\Scripts\MainCamera.cs" />
-     <Compile Include="Assets\Scripts\Manager.cs" />
-     <Compile Include="Assets\Scripts\MusicAudio.cs" />
-     <Compile Include="Assets\Scripts\Position.cs" />
-     <Compile Include="Assets\Scripts\TutorialManager.cs" />
+     <Compile Include="Assets\MuUnitySingleton.js" />
      <None Include="Assets\Plugins\TransformUtilities\README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{200B3210-3D2C-7D37-98FA-1122729394A0}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{200B3210-3D2C-7D37-98FA-1122729394A0}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

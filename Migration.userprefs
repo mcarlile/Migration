@@ -1,11 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Letter.cs">
     <Files>
-      <File FileName="Assets/Scripts/Bird.cs" Line="143" Column="12" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="101" Column="69" />
-      <File FileName="Assets/Scripts/Background.cs" Line="7" Column="51" />
-      <File FileName="Assets/Scripts/MainCamera.cs" Line="6" Column="61" />
+      <File FileName="Assets/Scripts/TutorialManager.cs" Line="104" Column="25" />
+      <File FileName="Assets/Scripts/Letter.cs" Line="9" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
