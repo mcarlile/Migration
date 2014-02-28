@@ -38,6 +38,9 @@ public class Manager : MonoBehaviour
 		public List<GameObject> birds = new List<GameObject> ();
 		public List<GameObject> availablePositions = new List<GameObject> ();
 		public int middle;
+		public int respawnTimeAfterDeath;
+		public float waitTimer = 1;
+		public TextMesh respawnText;
 
 
 		// Use this for initialization
@@ -93,6 +96,13 @@ public class Manager : MonoBehaviour
 				}
 				if (birds.Count == 0) {
 						gameOver.SetActive (true);
+						waitTimer = waitTimer + Time.deltaTime;
+						float waitTextTime = 10 - waitTimer;
+						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
+						if (waitTimer >= respawnTimeAfterDeath) {
+								print ("newlevelshouldappear");
+								Application.LoadLevel (0);
+						}
 				}
 		}
 

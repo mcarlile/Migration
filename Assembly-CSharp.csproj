@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Background.cs" />
      <Compile Include="Assets\Scripts\Bird.cs" />
      <Compile Include="Assets\Scripts\Flock.cs" />
+     <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
      <None Include="Assets\Plugins\TransformUtilities\README.txt" />
