@@ -99,6 +99,10 @@ public class TutorialManager : MonoBehaviour
 								Application.LoadLevel (0);
 						}
 				}
+
+				if ((letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 1) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 6) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) {
+						ChallengeComplete ();
+				}
 		}
 	
 		public void MoveLetterToFront (Letter letter, int spotVacated)
@@ -117,30 +121,12 @@ public class TutorialManager : MonoBehaviour
 				//				MoveBirdToBack (bird, spotVacated);
 				//				birdToMoveBack = bird;
 				letterInFront = letterIndex;
-		
-		
-		
 		}
-	
-		/* old code from before meeting with iain
-		public void MoveBirdToFront (int birdToMoveForward, int spotVacated)
+
+		public void ChallengeComplete ()
 		{
-				bird.SetPosition(4);
-				birds [birdToMoveForward].GetComponent<Bird> ().SetPosition (4);
-				if (birdToMoveForward != 4) {
-						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (birdToMoveForward + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				} else {
-//						if (spotVacated = 0) {
-						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-//						}
-						//iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("position", position5.transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				}
-				MoveBirdToBack (spotVacated);
-				birdInFront = birdToMoveForward;
-//				birds [birdToMoveForward].GetComponent<Bird> ().SetPosition (4);
+				Application.LoadLevel (1);
 		}
-		*/
-	
 		public void DestroyLetter (GameObject letter, int spotVacated)
 		{
 				audio.PlayOneShot (dead, 1);

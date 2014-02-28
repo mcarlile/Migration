@@ -101,7 +101,7 @@ public class Manager : MonoBehaviour
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
 								print ("newlevelshouldappear");
-								Application.LoadLevel (0);
+								Application.LoadLevel (1);
 						}
 				}
 		}
