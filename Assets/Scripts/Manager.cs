@@ -34,6 +34,7 @@ public class Manager : MonoBehaviour
 		public GameObject indexBird;
 		public AudioClip dead;
 		public GameObject gameOver;
+		public GameObject gameWon;
 		public GameObject flockAudio;
 		public List<GameObject> birds = new List<GameObject> ();
 		public List<GameObject> availablePositions = new List<GameObject> ();
@@ -41,6 +42,9 @@ public class Manager : MonoBehaviour
 		public int respawnTimeAfterDeath;
 		public float waitTimer = 1;
 		public TextMesh respawnText;
+		public GameObject background;
+		public GameObject finalMarker;
+		public GameObject flock;
 
 
 		// Use this for initialization
@@ -75,6 +79,10 @@ public class Manager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+
+				if (background.gameObject.transform.position.y <= finalMarker.gameObject.transform.position.y) {
+						gameWon.SetActive (true);
+				}
 				if (birds.Count % 2 == 0) {// Is even, because something divided by two without remainder is even, i.e 4/2 = 2, remainder 0
 						middle = ((birds.Count / 2) - 1);
 				} else {
@@ -96,12 +104,13 @@ public class Manager : MonoBehaviour
 				}
 				if (birds.Count == 0) {
 						gameOver.SetActive (true);
+						flock.SetActive (false);
 						waitTimer = waitTimer + Time.deltaTime;
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
 								print ("newlevelshouldappear");
-								Application.LoadLevel (1);
+								Application.LoadLevel (2);
 						}
 				}
 		}
@@ -158,7 +167,7 @@ public class Manager : MonoBehaviour
 
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
-				audio.PlayOneShot (dead, 1);
+				audio.PlayOneShot (dead, 0.1f);
 
 				//Remove dead bird from birds List
 				birds.Remove (bird);

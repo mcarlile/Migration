@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
-
 public class TutorialManager : MonoBehaviour
 {
 		public GameObject letter0;
@@ -15,6 +13,7 @@ public class TutorialManager : MonoBehaviour
 		public GameObject letter6;
 		public GameObject letter7;
 		public GameObject letter8;
+		public GameObject backgroundFlockTarget;
 		public int letterInFront;
 		public GameObject newLetterInFront;
 		public GameObject letterToMoveBack;
@@ -40,11 +39,41 @@ public class TutorialManager : MonoBehaviour
 		public int respawnTimeAfterDeath;
 		public float waitTimer = 1;
 		public TextMesh respawnText;
-	
+		public TextMesh instructionsText;
+		public bool waitTimerHasBeenReset = false;
+		public Color levelComplete;
+		public Color deselectedColor;
+		public Camera mainCamera;
+		public float zoomedInCameraSize;
+		public float zoomedOutCameraSize = 46;
+		public float zoomedOutCameraSizeWithMove = 22;
+		public string successText;
+		public string successText2;
+		public bool hasBeenLerped = false;
+		public bool hasBeenLerped2 = false;
+		public float lerpDuration = 2.0f;
+		float startTime;
+		float deltaT = 0;
+		public float zoomDuration = 2.0f;
+		bool zooming;
+		public GameObject tutorialBackground;
+		public GameObject cameraTarget;
+		public float fadeTime;
+		public GameObject rightBounds;
+		public bool readyToStart = false;
+		public bool hasBeenFaded = false;
+		bool fading = false;
+		public float fadeDuration = 2.0f;
+		public float finalOrthagraphicSize = 38;
+		public GameObject bird0;
+
 	
 		// Use this for initialization
 		void Start ()
 		{
+				rightBounds = tutorialBackground.GetComponent<TutorialBackground> ().rightBounds;
+				startTime = 0;
+				zoomedInCameraSize = mainCamera.orthographicSize;
 				letterInFront = 4;
 				letters.Add (letter0);
 				letters.Add (letter1);
@@ -64,6 +93,15 @@ public class TutorialManager : MonoBehaviour
 				availablePositions.Add (position6);
 				availablePositions.Add (position7);
 				availablePositions.Add (position8);
+				letter0.renderer.material.SetColor ("_Color", deselectedColor);
+				letter1.renderer.material.SetColor ("_Color", deselectedColor);
+				letter2.renderer.material.SetColor ("_Color", deselectedColor);
+				letter3.renderer.material.SetColor ("_Color", deselectedColor);
+				letter4.renderer.material.SetColor ("_Color", deselectedColor);
+				letter5.renderer.material.SetColor ("_Color", deselectedColor);
+				letter6.renderer.material.SetColor ("_Color", deselectedColor);
+				letter7.renderer.material.SetColor ("_Color", deselectedColor);
+				letter8.renderer.material.SetColor ("_Color", deselectedColor);
 		}
 	
 		public int getMiddle ()
@@ -74,6 +112,8 @@ public class TutorialManager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+				waitTimer = waitTimer + Time.deltaTime;
+
 				if (letters.Count % 2 == 0) {// Is even, because something divided by two without remainder is even, i.e 4/2 = 2, remainder 0
 						middle = ((letters.Count / 2) - 1);
 				} else {
@@ -91,7 +131,6 @@ public class TutorialManager : MonoBehaviour
 				}
 				if (letters.Count == 0) {
 						gameOver.SetActive (true);
-						waitTimer = waitTimer + Time.deltaTime;
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
@@ -100,8 +139,48 @@ public class TutorialManager : MonoBehaviour
 						}
 				}
 
-				if ((letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 1) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 6) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) {
+				if (((letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 1) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 6) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) || (letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 6) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 1) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) {
+						print ("challenge complete");		
 						ChallengeComplete ();
+						tutorialBackground.GetComponent<TutorialBackground> ().canMove = true;
+
+				}
+
+				if (tutorialBackground.gameObject.transform.position.x > rightBounds.gameObject.transform.position.x) {
+						print ("challenge2complete");
+						StartCoroutine ("Challenge2Complete");
+				}
+
+				if (readyToStart == true) {
+						bool timeReset = false;
+						if (timeReset = false) {
+								time = 0;
+								timeReset = true;
+						}
+						if (Input.GetKeyDown (KeyCode.Space)) {
+								instructionsText.gameObject.SetActive (false);
+								time = 1;
+								time = time += Time.deltaTime;
+								if (hasBeenFaded != true) {
+										if (!fading) {
+												StartCoroutine ("FadeOut", fadeDuration);
+						
+										}
+										hasBeenFaded = true;
+								}
+								if (hasBeenLerped2 != true) {
+										if (!zooming) {
+												StartCoroutine ("ZoomOut", finalOrthagraphicSize);
+						
+										}
+										hasBeenLerped2 = true;
+								}
+			
+						}
+						if ((time > 5.0f) && (hasBeenLerped2 = true)) {
+								print ("should be skipping to next level");
+								Application.LoadLevel (2);
+						}
 				}
 		}
 	
@@ -125,8 +204,51 @@ public class TutorialManager : MonoBehaviour
 
 		public void ChallengeComplete ()
 		{
-				Application.LoadLevel (1);
+				if (waitTimerHasBeenReset != true) {
+						waitTimer = 1;
+						waitTimerHasBeenReset = true;
+				}
+				if ((waitTimer > 2) && (waitTimer <= 2.2)) {
+						instructionsText.text = (successText);
+						ChangeColorToGreen ();
+				} 
+				if (waitTimer > 2.2) {
+						DeselectColor ();
+
+						if (hasBeenLerped != true) {
+								if (!zooming) {
+										StartCoroutine ("ZoomOut", zoomedOutCameraSize);
+					
+								}
+								hasBeenLerped = true;
+						}
+				}
+
+
 		}
+
+		public IEnumerator Challenge2Complete ()
+		{
+				backgroundFlockTarget.SetActive (false);
+				instructionsText.text = (successText2);
+				readyToStart = true;
+				//scale the boxes back to bird size
+				float deltaT = 0;
+		
+				zooming = true;
+				while (deltaT < zoomDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						for (int i=0; i<letters.Count; i++) {
+								letters [i].gameObject.transform.localScale = Vector3.Lerp ((letters [i].gameObject.transform.localScale), bird0.gameObject.transform.localScale, deltaT / zoomDuration);
+						}
+				}
+				zooming = false;
+		}
+	
+		//				Application.LoadLevel (1);
+	
+	
 		public void DestroyLetter (GameObject letter, int spotVacated)
 		{
 				audio.PlayOneShot (dead, 1);
@@ -172,7 +294,7 @@ public class TutorialManager : MonoBehaviour
 				}
 		
 				letterToMoveBack = letters [middle];
-		} 
+		}
 	
 		public void MoveLetterToBack (Letter letter, int vacatedPosition)
 		//		public void MoveBirdToBack (int vacatedPosition)
@@ -189,6 +311,68 @@ public class TutorialManager : MonoBehaviour
 				//birdToMoveBack = bird.gameObject;
 				//				birds [getMiddle ()].GetComponent<Bird> ().SetPosition (vacatedPosition);
 		
+		}
+
+		public void ChangeColorToGreen ()
+		{
+				letter0.renderer.material.SetColor ("_Color", levelComplete);
+				letter1.renderer.material.SetColor ("_Color", levelComplete);
+				letter2.renderer.material.SetColor ("_Color", levelComplete);
+				letter3.renderer.material.SetColor ("_Color", levelComplete);
+				letter4.renderer.material.SetColor ("_Color", levelComplete);
+				letter5.renderer.material.SetColor ("_Color", levelComplete);
+				letter6.renderer.material.SetColor ("_Color", levelComplete);
+				letter7.renderer.material.SetColor ("_Color", levelComplete);
+				letter8.renderer.material.SetColor ("_Color", levelComplete);
+		}
+
+		public void DeselectColor ()
+		{
+				letter0.renderer.material.SetColor ("_Color", deselectedColor);
+				letter1.renderer.material.SetColor ("_Color", deselectedColor);
+				letter2.renderer.material.SetColor ("_Color", deselectedColor);
+				letter3.renderer.material.SetColor ("_Color", deselectedColor);
+				letter4.renderer.material.SetColor ("_Color", deselectedColor);
+				letter5.renderer.material.SetColor ("_Color", deselectedColor);
+				letter6.renderer.material.SetColor ("_Color", deselectedColor);
+				letter7.renderer.material.SetColor ("_Color", deselectedColor);
+				letter8.renderer.material.SetColor ("_Color", deselectedColor);
+		}
+
+		private IEnumerator ZoomOut (float zoomDistance)
+		{
+				float deltaT = 0;
+	
+				zooming = true;
+				while (deltaT < zoomDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						Camera.main.orthographicSize = Mathf.Lerp (Camera.main.orthographicSize, zoomDistance, deltaT / zoomDuration);
+//						mainCamera.transform.position = Vector3.Lerp (mainCamera.transform.position, cameraTarget.gameObject.transform.position, deltaT / zoomDuration);
+				}
+				zooming = false;
+		}
+
+		private IEnumerator FadeOut (float fadeOutDuration)
+		{
+				print ("fade out has been called");
+				float deltaT = 0;
+		
+				fading = true;
+				while (deltaT < fadeDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						iTween.FadeTo (letter0.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter1.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter2.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter3.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter4.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter5.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter6.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter7.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+						iTween.FadeTo (letter8.gameObject, iTween.Hash ("alpha", 0, "time", fadeOutDuration));
+				}
+				fading = false;
 		}
 }
 

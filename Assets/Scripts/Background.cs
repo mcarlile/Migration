@@ -23,6 +23,7 @@ public class Background : MonoBehaviour
 				gameObject.transform.Translate (movement);
 		
 				if (Input.GetKey (KeyCode.LeftArrow)) {
+						print ("left arrow");
 						if (gameObject.transform.position.x <= rightBounds.gameObject.transform.position.x) {
 								movement = Vector3.right * movementSpeed * Time.deltaTime;
 								gameObject.transform.Translate (movement);
