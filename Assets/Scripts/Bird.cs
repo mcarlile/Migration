@@ -158,6 +158,7 @@ public class Bird : MonoBehaviour
 		public void ChangeHealthMeterColor ()
 		{
 				if (health >= 5) {
+						gameObject.renderer.material.SetColor ("_Color", deselectedColor);
 						health1.renderer.material.SetColor ("_Color", healthHigh);
 						health2.renderer.material.SetColor ("_Color", healthHigh);
 						health3.renderer.material.SetColor ("_Color", healthHigh);
@@ -167,6 +168,7 @@ public class Bird : MonoBehaviour
 						health7.renderer.material.SetColor ("_Color", healthHigh);
 				}
 				if ((health >= 2) && (health < 5)) {
+						gameObject.renderer.material.SetColor ("_Color", deselectedColor);
 						health1.renderer.material.SetColor ("_Color", healthMedium);
 						health2.renderer.material.SetColor ("_Color", healthMedium);
 						health3.renderer.material.SetColor ("_Color", healthMedium);
@@ -175,7 +177,8 @@ public class Bird : MonoBehaviour
 						health6.renderer.material.SetColor ("_Color", healthMedium);
 						health7.renderer.material.SetColor ("_Color", healthMedium);
 				}
-				if (health <= 2) {
+				if (health <= 4) {
+						gameObject.renderer.material.SetColor ("_Color", healthLow);
 						health1.renderer.material.SetColor ("_Color", healthLow);
 						health2.renderer.material.SetColor ("_Color", healthLow);
 						health3.renderer.material.SetColor ("_Color", healthLow);

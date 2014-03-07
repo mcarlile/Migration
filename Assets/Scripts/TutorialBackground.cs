@@ -20,7 +20,7 @@ public class TutorialBackground : MonoBehaviour
 		void Update ()
 		{
 				if (canMove == true) {
-						if (Input.GetKey (KeyCode.LeftArrow)) {
+						if ((Input.GetKey (KeyCode.LeftArrow)) || (Input.GetKey (KeyCode.A))) {
 								print ("left arrow");
 								if (gameObject.transform.position.x < rightBounds.gameObject.transform.position.x) {
 										movement = Vector3.right * movementSpeed * Time.deltaTime;
@@ -29,7 +29,7 @@ public class TutorialBackground : MonoBehaviour
 			
 						}
 		
-						if (Input.GetKey (KeyCode.RightArrow)) {
+						if ((Input.GetKey (KeyCode.RightArrow)) || (Input.GetKey (KeyCode.D))) {
 								if (gameObject.transform.position.x >= leftBounds.gameObject.transform.position.x) {
 										movement = Vector3.left * movementSpeed * Time.deltaTime;
 										gameObject.transform.Translate (movement);
