@@ -66,6 +66,8 @@ public class TutorialManager : MonoBehaviour
 		public float fadeDuration = 2.0f;
 		public float finalOrthagraphicSize = 38;
 		public GameObject bird0;
+		public bool puzzleSolved = false;
+		bool moving = false;
 
 	
 		// Use this for initialization
@@ -139,7 +141,26 @@ public class TutorialManager : MonoBehaviour
 						}
 				}
 
-				if (((letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 1) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 6) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) || (letter0.GetComponent<Letter> ().letterPosition == 5) && (letter1.GetComponent<Letter> ().letterPosition == 4) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter3.GetComponent<Letter> ().letterPosition == 6) && (letter4.GetComponent<Letter> ().letterPosition == 2) && (letter5.GetComponent<Letter> ().letterPosition == 1) && (letter2.GetComponent<Letter> ().letterPosition == 3) && (letter6.GetComponent<Letter> ().letterPosition == 8) && (letter7.GetComponent<Letter> ().letterPosition == 0) && (letter8.GetComponent<Letter> ().letterPosition == 7)) {
+				if (((((letter0.GetComponent<Letter> ().letterPosition == 5) 
+						&& (letter1.GetComponent<Letter> ().letterPosition == 4)
+						&& (letter2.GetComponent<Letter> ().letterPosition == 3)
+						&& (letter3.GetComponent<Letter> ().letterPosition == 1) 
+						&& (letter4.GetComponent<Letter> ().letterPosition == 2) 
+						&& (letter5.GetComponent<Letter> ().letterPosition == 6) 
+						&& (letter6.GetComponent<Letter> ().letterPosition == 8)
+						&& (letter7.GetComponent<Letter> ().letterPosition == 0)
+						&& (letter8.GetComponent<Letter> ().letterPosition == 7))
+		     ||
+						((letter0.GetComponent<Letter> ().letterPosition == 5)
+						&& (letter1.GetComponent<Letter> ().letterPosition == 4)
+						&& (letter2.GetComponent<Letter> ().letterPosition == 3)
+						&& (letter3.GetComponent<Letter> ().letterPosition == 6)
+						&& (letter4.GetComponent<Letter> ().letterPosition == 2)
+						&& (letter5.GetComponent<Letter> ().letterPosition == 1)
+						&& (letter2.GetComponent<Letter> ().letterPosition == 3)
+						&& (letter6.GetComponent<Letter> ().letterPosition == 8)
+						&& (letter7.GetComponent<Letter> ().letterPosition == 0)
+						&& (letter8.GetComponent<Letter> ().letterPosition == 7))) || (puzzleSolved == true))) {
 						print ("challenge complete");		
 						ChallengeComplete ();
 						tutorialBackground.GetComponent<TutorialBackground> ().canMove = true;
@@ -164,22 +185,22 @@ public class TutorialManager : MonoBehaviour
 								if (hasBeenFaded != true) {
 										if (!fading) {
 												StartCoroutine ("FadeOut", fadeDuration);
-						
 										}
 										hasBeenFaded = true;
 								}
 								if (hasBeenLerped2 != true) {
 										if (!zooming) {
 												StartCoroutine ("ZoomOut", finalOrthagraphicSize);
-						
+										}
+										if (!moving) {
+												StartCoroutine ("MoveCamera", cameraTarget.transform);
 										}
 										hasBeenLerped2 = true;
 								}
 			
 						}
-						if ((time > 5.0f) && (hasBeenLerped2 = true)) {
+						if ((time > 5.0f) && (hasBeenLerped2 == true)) {
 								print ("should be skipping to next level");
-								Application.LoadLevel (2);
 						}
 				}
 		}
@@ -218,7 +239,6 @@ public class TutorialManager : MonoBehaviour
 						if (hasBeenLerped != true) {
 								if (!zooming) {
 										StartCoroutine ("ZoomOut", zoomedOutCameraSize);
-					
 								}
 								hasBeenLerped = true;
 						}
@@ -234,20 +254,8 @@ public class TutorialManager : MonoBehaviour
 				readyToStart = true;
 				//scale the boxes back to bird size
 				float deltaT = 0;
-		
-				zooming = true;
-				while (deltaT < zoomDuration) {
-						deltaT += Time.deltaTime;
-						yield return true;
-						for (int i=0; i<letters.Count; i++) {
-								letters [i].gameObject.transform.localScale = Vector3.Lerp ((letters [i].gameObject.transform.localScale), bird0.gameObject.transform.localScale, deltaT / zoomDuration);
-						}
-				}
-				zooming = false;
+				yield return true;
 		}
-	
-		//				Application.LoadLevel (1);
-	
 	
 		public void DestroyLetter (GameObject letter, int spotVacated)
 		{
@@ -342,17 +350,16 @@ public class TutorialManager : MonoBehaviour
 		private IEnumerator ZoomOut (float zoomDistance)
 		{
 				float deltaT = 0;
-	
+				print ("zoom out has been called");
 				zooming = true;
 				while (deltaT < zoomDuration) {
 						deltaT += Time.deltaTime;
 						yield return true;
 						Camera.main.orthographicSize = Mathf.Lerp (Camera.main.orthographicSize, zoomDistance, deltaT / zoomDuration);
-//						mainCamera.transform.position = Vector3.Lerp (mainCamera.transform.position, cameraTarget.gameObject.transform.position, deltaT / zoomDuration);
 				}
 				zooming = false;
 		}
-
+	
 		private IEnumerator FadeOut (float fadeOutDuration)
 		{
 				print ("fade out has been called");
@@ -374,5 +381,22 @@ public class TutorialManager : MonoBehaviour
 				}
 				fading = false;
 		}
+
+		private IEnumerator MoveCamera (Transform newCameraPosition)
+		{
+
+				print ("move camera has been called");
+				float deltaT = 0;
+		
+				moving = true;
+				while (deltaT < fadeDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						mainCamera.transform.position = Vector3.Lerp (mainCamera.transform.position, newCameraPosition.position, deltaT / zoomDuration);
+				}
+				moving = false;
+
+		}
+		
 }
 
