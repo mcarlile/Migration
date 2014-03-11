@@ -65,9 +65,12 @@ public class TutorialManager : MonoBehaviour
 		bool fading = false;
 		public float fadeDuration = 2.0f;
 		public float finalOrthagraphicSize = 38;
+		public float scalingDuration = 2.0f;
 		public GameObject bird0;
 		public bool puzzleSolved = false;
 		bool moving = false;
+		bool scaling = false;
+		public Vector3 newLetterScale = new Vector3 (1.0f, 1.0f, 1.0f);
 
 	
 		// Use this for initialization
@@ -194,6 +197,9 @@ public class TutorialManager : MonoBehaviour
 										}
 										if (!moving) {
 												StartCoroutine ("MoveCamera", cameraTarget.transform);
+										}
+										if (!scaling) {
+												StartCoroutine ("ScaleLetters");
 										}
 										hasBeenLerped2 = true;
 								}
@@ -396,6 +402,23 @@ public class TutorialManager : MonoBehaviour
 				}
 				moving = false;
 
+		}
+		private IEnumerator ScaleLetters ()
+		{
+		
+				print ("scaling has been called");
+				float deltaT = 0;
+		
+				scaling = true;
+				while (deltaT < scalingDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						for (int i=0; i<letters.Count; i++) {
+								letters [i].gameObject.transform.localScale = Vector3.Lerp (letters [i].transform.localScale, newLetterScale, deltaT / zoomDuration);
+						}
+				}
+				scaling = false;
+		
 		}
 		
 }
