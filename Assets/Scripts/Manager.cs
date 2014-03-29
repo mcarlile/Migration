@@ -109,17 +109,18 @@ public class Manager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-
-				if (background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y) {
-						if (hasBeenLerped != true) {
-								if (!slowing) {
-										StartCoroutine ("SlowBackground");
-								}
-								hasBeenLerped = true;
-						} else {
-								if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
-										print ("switching to next scene");
-										fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+				if (tutorialMode == false) {
+						if ((background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y)) {
+								if (hasBeenLerped != true) {
+										if (!slowing) {
+												StartCoroutine ("SlowBackground");
+										}
+										hasBeenLerped = true;
+								} else {
+										if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
+												print ("switching to next scene");
+												fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+										}
 								}
 						}
 				}
