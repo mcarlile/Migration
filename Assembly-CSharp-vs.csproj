@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CreditsManager.cs" />
      <Compile Include="Assets\Scripts\A_Bird.cs" />
      <Compile Include="Assets\Scripts\A_Flock.cs" />
      <Compile Include="Assets\Scripts\Background.cs" />
@@ -55,6 +56,7 @@
      <Compile Include="Assets\Scripts\Letter.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
+     <Compile Include="Assets\Scripts\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\MusicAudio.cs" />
      <Compile Include="Assets\Scripts\NarrativeManager.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
