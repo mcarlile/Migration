@@ -46,11 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CreditsManager.cs" />
      <Compile Include="Assets\Scripts\A_Bird.cs" />
      <Compile Include="Assets\Scripts\A_Flock.cs" />
      <Compile Include="Assets\Scripts\Background.cs" />
      <Compile Include="Assets\Scripts\Bird.cs" />
+     <Compile Include="Assets\Scripts\CreditsManager.cs" />
      <Compile Include="Assets\Scripts\Flock.cs" />
      <Compile Include="Assets\Scripts\FlockTarget.cs" />
      <Compile Include="Assets\Scripts\Letter.cs" />
