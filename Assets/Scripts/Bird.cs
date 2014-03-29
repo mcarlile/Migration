@@ -21,7 +21,13 @@ public class Bird : MonoBehaviour
 		public GameObject health7;
 		public AudioClip startled;
 		public AudioClip dead;
-	
+		public GameObject narrativeManager;
+		public bool tutorialMode;
+		public bool healthMessageTriggered;
+		public bool successfullyCompletedSwap = false;
+		public bool allowClick;
+
+
 	
 		// Use this for initialization
 		void Start ()
@@ -86,6 +92,9 @@ public class Bird : MonoBehaviour
 				if (health <= 0) {
 						SendDeathData ();
 						Destroy (gameObject);
+						if (tutorialMode == true) {
+								narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
+						}
 				}
 		
 		}
@@ -93,10 +102,14 @@ public class Bird : MonoBehaviour
 		void OnMouseOver ()
 		{
 				gameObject.renderer.material.SetColor ("_Color", highlightedColor);
-				if ((Input.GetMouseButtonDown (0))) {
+				if ((Input.GetMouseButtonDown (0)) && (allowClick == true)) {
 						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
 						manager.GetComponent<Manager> ().MoveBirdToFront (this, birdPosition);
 						audio.PlayOneShot (startled, 1);
+						if (tutorialMode == true) {
+								narrativeManager.GetComponent<NarrativeManager> ().ShowSwapSuccessMessage ();
+								manager.GetComponent <Manager> ().SuccessfullyCompletedSwap ();
+						}
 				}
 		}
 	
@@ -150,6 +163,10 @@ public class Bird : MonoBehaviour
 				if (otherCollider.tag.Equals ("Hazard")) {
 						SendDeathData ();
 						Destroy (gameObject);
+						if (tutorialMode == true) {
+								narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
+								manager.GetComponent<Manager> ().BirdDiedOnCollision ();
+						}
 			
 				}
 		}
@@ -178,6 +195,11 @@ public class Bird : MonoBehaviour
 						health7.renderer.material.SetColor ("_Color", healthMedium);
 				}
 				if (health <= 4) {
+						if ((tutorialMode == true) && (healthMessageTriggered == false)) {
+								narrativeManager.GetComponent<NarrativeManager> ().ShowLowHealthMessage ();
+								manager.GetComponent<Manager> ().AllowBirdsToBeClicked ();
+								healthMessageTriggered = true;
+						}
 						gameObject.renderer.material.SetColor ("_Color", healthLow);
 						health1.renderer.material.SetColor ("_Color", healthLow);
 						health2.renderer.material.SetColor ("_Color", healthLow);
@@ -188,4 +210,10 @@ public class Bird : MonoBehaviour
 						health7.renderer.material.SetColor ("_Color", healthLow);
 				}
 		}
+
+		public void AllowClick ()
+		{
+				allowClick = true;
+		}
+
 }

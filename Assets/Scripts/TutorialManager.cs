@@ -41,7 +41,6 @@ public class TutorialManager : MonoBehaviour
 		public TextMesh respawnText;
 		public TextMesh instructionsText;
 		public bool waitTimerHasBeenReset = false;
-		public Color levelComplete;
 		public Color deselectedColor;
 		public Camera mainCamera;
 		public float zoomedInCameraSize;
@@ -71,6 +70,11 @@ public class TutorialManager : MonoBehaviour
 		bool moving = false;
 		bool scaling = false;
 		public Vector3 newLetterScale = new Vector3 (1.0f, 1.0f, 1.0f);
+		public bool successfullyCompletedSwap = false;
+		public GameObject fadeBlack;
+		public AudioClip success;
+		public bool puzzleAudioHasPlayed = false;
+		public bool movementAudioHasPlayed = false;
 
 	
 		// Use this for initialization
@@ -167,12 +171,20 @@ public class TutorialManager : MonoBehaviour
 						print ("challenge complete");		
 						ChallengeComplete ();
 						tutorialBackground.GetComponent<TutorialBackground> ().canMove = true;
+						if (puzzleAudioHasPlayed == false) {
+								audio.PlayOneShot (success, 1);
+								puzzleAudioHasPlayed = true;
+						}
 
 				}
 
 				if (tutorialBackground.gameObject.transform.position.x > rightBounds.gameObject.transform.position.x) {
 						print ("challenge2complete");
 						StartCoroutine ("Challenge2Complete");
+						if (movementAudioHasPlayed == false) {
+								audio.PlayOneShot (success, 1);
+								movementAudioHasPlayed = true;
+						}
 				}
 
 				if (readyToStart == true) {
@@ -202,11 +214,13 @@ public class TutorialManager : MonoBehaviour
 												StartCoroutine ("ScaleLetters");
 										}
 										hasBeenLerped2 = true;
+
 								}
 			
 						}
-						if ((time > 5.0f) && (hasBeenLerped2 == true)) {
+						if ((time > 0.5f) && (hasBeenLerped2 == true)) {
 								print ("should be skipping to next level");
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
 						}
 				}
 		}
@@ -237,11 +251,8 @@ public class TutorialManager : MonoBehaviour
 				}
 				if ((waitTimer > 2) && (waitTimer <= 2.2)) {
 						instructionsText.text = (successText);
-						ChangeColorToGreen ();
 				} 
 				if (waitTimer > 2.2) {
-						DeselectColor ();
-
 						if (hasBeenLerped != true) {
 								if (!zooming) {
 										StartCoroutine ("ZoomOut", zoomedOutCameraSize);
@@ -327,32 +338,6 @@ public class TutorialManager : MonoBehaviour
 		
 		}
 
-		public void ChangeColorToGreen ()
-		{
-				letter0.renderer.material.SetColor ("_Color", levelComplete);
-				letter1.renderer.material.SetColor ("_Color", levelComplete);
-				letter2.renderer.material.SetColor ("_Color", levelComplete);
-				letter3.renderer.material.SetColor ("_Color", levelComplete);
-				letter4.renderer.material.SetColor ("_Color", levelComplete);
-				letter5.renderer.material.SetColor ("_Color", levelComplete);
-				letter6.renderer.material.SetColor ("_Color", levelComplete);
-				letter7.renderer.material.SetColor ("_Color", levelComplete);
-				letter8.renderer.material.SetColor ("_Color", levelComplete);
-		}
-
-		public void DeselectColor ()
-		{
-				letter0.renderer.material.SetColor ("_Color", deselectedColor);
-				letter1.renderer.material.SetColor ("_Color", deselectedColor);
-				letter2.renderer.material.SetColor ("_Color", deselectedColor);
-				letter3.renderer.material.SetColor ("_Color", deselectedColor);
-				letter4.renderer.material.SetColor ("_Color", deselectedColor);
-				letter5.renderer.material.SetColor ("_Color", deselectedColor);
-				letter6.renderer.material.SetColor ("_Color", deselectedColor);
-				letter7.renderer.material.SetColor ("_Color", deselectedColor);
-				letter8.renderer.material.SetColor ("_Color", deselectedColor);
-		}
-
 		private IEnumerator ZoomOut (float zoomDistance)
 		{
 				float deltaT = 0;
@@ -420,6 +405,8 @@ public class TutorialManager : MonoBehaviour
 				scaling = false;
 		
 		}
+
+
 		
 }
 

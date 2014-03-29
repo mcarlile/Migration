@@ -57,6 +57,7 @@ public class TutorialManagerA : MonoBehaviour
 		public string successText;
 		public string introText1;
 		public string introText2;
+		public GameObject flock;
 
 	
 	
@@ -80,6 +81,7 @@ public class TutorialManagerA : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
+				flock.SetActive (false);
 				instructionsText.text = (introText1);
 				startTime = 0;
 				zoomedInCameraSize = mainCamera.orthographicSize;
@@ -123,6 +125,7 @@ public class TutorialManagerA : MonoBehaviour
 		{
 				
 				if (time >= 5.0f) {
+						flock.SetActive (true);
 						instructionsText.text = (introText2);
 
 						if (Input.GetKeyDown (KeyCode.Space)) {

@@ -56,10 +56,13 @@
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\MusicAudio.cs" />
+     <Compile Include="Assets\Scripts\NarrativeManager.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
+     <Compile Include="Assets\Scripts\SceneFadeOutIn.cs" />
      <Compile Include="Assets\Scripts\TutorialBackground.cs" />
      <Compile Include="Assets\Scripts\TutorialManager.cs" />
      <Compile Include="Assets\Scripts\TutorialManagerA.cs" />
+     <Compile Include="Assets\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

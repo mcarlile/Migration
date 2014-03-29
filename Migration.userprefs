@@ -1,11 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TutorialManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Background.cs" Line="25" Column="31" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TutorialManagerA.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TutorialManager.cs" Line="400" Column="25" />
+      <File FileName="Assets/Scripts/SceneFadeOutIn.cs" Line="23" Column="33" />
+      <File FileName="Assets/Scripts/TutorialManager.cs" Line="186" Column="31" />
+      <File FileName="Assets/Scripts/Bird.cs" Line="200" Column="52" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="116" Column="4" />
+      <File FileName="Assets/Scripts/TutorialManagerA.cs" Line="189" Column="24" />
+      <File FileName="Assets/Timer.cs" Line="22" Column="60" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

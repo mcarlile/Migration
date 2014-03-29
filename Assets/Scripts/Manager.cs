@@ -29,7 +29,7 @@ public class Manager : MonoBehaviour
 		public GameObject position8;
 		public GameObject position9;
 		public float time;
-		public float secondsBetweenHealthChange = 5;
+		public float secondsBetweenHealthChange;
 		public int birdIndex;
 		public GameObject indexBird;
 		public AudioClip dead;
@@ -44,7 +44,26 @@ public class Manager : MonoBehaviour
 		public TextMesh respawnText;
 		public GameObject background;
 		public GameObject finalMarker;
+		public GameObject completionMarker;
 		public GameObject flock;
+		public bool successfullyCompletedSwap = false;
+		public bool tutorialMode;
+		public bool birdCollided;
+		public GameObject narrativeManager;
+		public bool ignoreHealthChange = false;
+		public bool succesfullyPassedVillage = false;
+		public bool avoidanceLevel = false;
+		public bool birdDiedOnCollision = false;
+		public bool timeReset = false;
+		public bool startHealthDecrement = false;
+		public bool needsFadeToBlack;
+		public GameObject fadeBlack;
+		public bool fadeFromBlack;
+		public AudioClip failure;
+		public AudioClip success;
+		public bool allowClickHasBeenTriggered = false;
+		public bool villageAudioHasPlayed = false;
+
 
 
 		// Use this for initialization
@@ -69,6 +88,9 @@ public class Manager : MonoBehaviour
 				availablePositions.Add (position6);
 				availablePositions.Add (position7);
 				availablePositions.Add (position8);
+				if (needsFadeToBlack == true) {
+						fadeBlack.SetActive (true);
+				}
 		}
 
 		public int getMiddle ()
@@ -83,6 +105,42 @@ public class Manager : MonoBehaviour
 				if (background.gameObject.transform.position.y <= finalMarker.gameObject.transform.position.y) {
 						gameWon.SetActive (true);
 				}
+
+				if ((tutorialMode == true) && (avoidanceLevel == true)) {
+						
+						if ((background.gameObject.transform.position.y <= completionMarker.gameObject.transform.position.y) && (birdDiedOnCollision == false)) {
+								print ("avoided obstacle");
+								//cycle success text, then reset the counter to prepare to load new scene
+								narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionAvoidanceMessage ();
+								succesfullyPassedVillage = true;
+								if (villageAudioHasPlayed == false) {
+										audio.PlayOneShot (success, 1);
+										villageAudioHasPlayed = true;
+								}
+						}
+				}
+
+				if ((startHealthDecrement == false) && (time > 5.0f)) {
+						narrativeManager.GetComponent<NarrativeManager> ().ClearMessages ();
+						startHealthDecrement = true;
+				}
+
+				if ((startHealthDecrement == true) && (time > 2.0f)) {
+						if (allowClickHasBeenTriggered == false) {
+								bird0.GetComponent<Bird> ().AllowClick ();
+								bird1.GetComponent<Bird> ().AllowClick ();
+								bird2.GetComponent<Bird> ().AllowClick ();
+								bird3.GetComponent<Bird> ().AllowClick ();
+								bird4.GetComponent<Bird> ().AllowClick ();
+								bird5.GetComponent<Bird> ().AllowClick ();
+								bird6.GetComponent<Bird> ().AllowClick ();
+								bird7.GetComponent<Bird> ().AllowClick ();
+								bird8.GetComponent<Bird> ().AllowClick ();
+								allowClickHasBeenTriggered = true;
+						}
+				}
+		
+		
 				if (birds.Count % 2 == 0) {// Is even, because something divided by two without remainder is even, i.e 4/2 = 2, remainder 0
 						middle = ((birds.Count / 2) - 1);
 				} else {
@@ -92,9 +150,30 @@ public class Manager : MonoBehaviour
 				newBirdInFront = GameObject.Find ("Bird" + birdInFront);
 				//Every few seconds, the changehealth function is called, then the timer is reset
 				time = time + Time.deltaTime;
-				if (time >= secondsBetweenHealthChange) {
-						ChangeHealth ();
-						time = 0;
+				if (tutorialMode == true) {
+						if (startHealthDecrement == true) {
+								if (time >= secondsBetweenHealthChange) {
+										if (successfullyCompletedSwap == false) {
+												if (succesfullyPassedVillage == false) {
+														if (startHealthDecrement == true) {
+																if (birdDiedOnCollision == false) {
+																		ChangeHealth ();
+																		time = 0;
+																}
+														}
+												}
+										}
+								}
+						}
+				}
+				
+	
+
+				if (tutorialMode == false) {
+						if (time >= secondsBetweenHealthChange) {
+								ChangeHealth ();
+								time = 0;
+						}
 				}
 
 				indexBird = GameObject.Find ("bird" + birdIndex);
@@ -103,17 +182,54 @@ public class Manager : MonoBehaviour
 						flockAudio.SetActive (false);
 				}
 				if (birds.Count == 0) {
-						gameOver.SetActive (true);
+						if (tutorialMode == false) {
+								gameOver.SetActive (true);
+						}
 						flock.SetActive (false);
 						waitTimer = waitTimer + Time.deltaTime;
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
 								print ("newlevelshouldappear");
-								Application.LoadLevel (2);
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
 						}
 				}
+
+				if ((successfullyCompletedSwap == true) && (time > 5.0f)) {
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (3);
+				}
+
+				if ((birdDiedOnCollision == true) && (time > 5.0f)) {
+						if (timeReset == false) {
+								time = 0;
+								timeReset = true;
+								print ("time should have been reset");
+						}
+				}
+		
+				if ((succesfullyPassedVillage) && (time > 5.0f)) {
+						if (timeReset == false) {
+								time = 0;
+								timeReset = true;
+								print ("time should have been reset");
+								audio.PlayOneShot (success, 1);
+
+						}
+				}
+
+				if ((succesfullyPassedVillage == true) && (timeReset == true) && (time > 4.0f)) {
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (4);
+				}
+
+				if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (3);
+				}
+		
 		}
+	
+	
+	
+	
 
 		void ChangeHealth ()
 		{
@@ -145,25 +261,6 @@ public class Manager : MonoBehaviour
 
 				
 		}
-
-		/* old code from before meeting with iain
-		public void MoveBirdToFront (int birdToMoveForward, int spotVacated)
-		{
-				bird.SetPosition(4);
-				birds [birdToMoveForward].GetComponent<Bird> ().SetPosition (4);
-				if (birdToMoveForward != 4) {
-						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (birdToMoveForward + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				} else {
-//						if (spotVacated = 0) {
-						iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-//						}
-						//iTween.MoveTo (birds [birdToMoveForward], iTween.Hash ("position", position5.transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				}
-				MoveBirdToBack (spotVacated);
-				birdInFront = birdToMoveForward;
-//				birds [birdToMoveForward].GetComponent<Bird> ().SetPosition (4);
-		}
-		*/
 
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
@@ -235,5 +332,33 @@ public class Manager : MonoBehaviour
 //				birds [getMiddle ()].GetComponent<Bird> ().SetPosition (vacatedPosition);
 
 		}
+
+		public void SuccessfullyCompletedSwap ()
+		{
+				audio.PlayOneShot (success, 1);
+				successfullyCompletedSwap = true;
+		}
+
+		public void BirdDiedOnCollision ()
+		{
+				birdDiedOnCollision = true;
+				narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
+				audio.PlayOneShot (failure, 1);
+
+		}
+
+		public void AllowBirdsToBeClicked ()
+		{
+				bird0.GetComponent<Bird> ().AllowClick ();
+				bird1.GetComponent<Bird> ().AllowClick ();
+				bird2.GetComponent<Bird> ().AllowClick ();
+				bird3.GetComponent<Bird> ().AllowClick ();
+				bird4.GetComponent<Bird> ().AllowClick ();
+				bird5.GetComponent<Bird> ().AllowClick ();
+				bird6.GetComponent<Bird> ().AllowClick ();
+				bird7.GetComponent<Bird> ().AllowClick ();
+				bird8.GetComponent<Bird> ().AllowClick ();
+		}
+
 }
 
