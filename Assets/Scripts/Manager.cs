@@ -63,8 +63,16 @@ public class Manager : MonoBehaviour
 		public AudioClip success;
 		public bool allowClickHasBeenTriggered = false;
 		public bool villageAudioHasPlayed = false;
-
-
+		public GameObject slowDownPoint;
+		public GameObject camera;
+		public float deltaT = 0;
+		public float slowDownDuration = 60.0f;
+		public bool slowing = false;
+		public bool hasBeenLerped = false;
+		public int currentLevel;
+		public GameObject target;
+		public GameObject targetIndicator;
+		public float targetIndicatorYPosition;
 
 		// Use this for initialization
 		void Start ()
@@ -102,8 +110,18 @@ public class Manager : MonoBehaviour
 		void Update ()
 		{
 
-				if (background.gameObject.transform.position.y <= finalMarker.gameObject.transform.position.y) {
-						gameWon.SetActive (true);
+				if (background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y) {
+						if (hasBeenLerped != true) {
+								if (!slowing) {
+										StartCoroutine ("SlowBackground");
+								}
+								hasBeenLerped = true;
+						} else {
+								if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
+										print ("switching to next scene");
+										fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+								}
+						}
 				}
 
 				if ((tutorialMode == true) && (avoidanceLevel == true)) {
@@ -358,6 +376,23 @@ public class Manager : MonoBehaviour
 				bird6.GetComponent<Bird> ().AllowClick ();
 				bird7.GetComponent<Bird> ().AllowClick ();
 				bird8.GetComponent<Bird> ().AllowClick ();
+		}
+
+		private IEnumerator SlowBackground ()
+		{
+		
+				print ("slowing has been called");
+				float deltaT = 0;
+		
+				slowing = true;
+				while (deltaT < slowDownDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						camera.GetComponent<MainCamera> ().movementSpeed = Mathf.Lerp (camera.GetComponent<MainCamera> ().movementSpeed, 0.0f, deltaT / slowDownDuration);
+						background.GetComponent<Background> ().movementSpeed = Mathf.Lerp (background.GetComponent<Background> ().movementSpeed, 0.0f, deltaT / slowDownDuration);
+				}
+				slowing = false;
+		
 		}
 
 }

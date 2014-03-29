@@ -8,7 +8,7 @@ public class Bird : MonoBehaviour
 		public Color healthHigh;
 		public Color healthMedium;
 		public Color healthLow;
-		public GameObject manager;
+		public GameObject manager; 
 		public int birdNumber;
 		public int birdPosition;
 		public double health = 7;

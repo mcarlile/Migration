@@ -75,6 +75,7 @@ public class TutorialManager : MonoBehaviour
 		public AudioClip success;
 		public bool puzzleAudioHasPlayed = false;
 		public bool movementAudioHasPlayed = false;
+		public bool slowing = false;
 
 	
 		// Use this for initialization
@@ -405,6 +406,8 @@ public class TutorialManager : MonoBehaviour
 				scaling = false;
 		
 		}
+	
+
 
 
 		
