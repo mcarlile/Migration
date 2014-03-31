@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 		public float time;
 		public float advanceLevelTime;
 		public GameObject fadeBlack;
+		public int levelToAdvanceTo;
 
 		// Use this for initialization
 		void Start ()
@@ -19,7 +20,7 @@ public class Timer : MonoBehaviour
 		{
 				time = time + Time.deltaTime;
 				if (time >= advanceLevelTime) {
-						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (5);
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (levelToAdvanceTo);
 				}
 
 		}
