@@ -66,11 +66,11 @@
      <Compile Include="Assets\Scripts\TutorialBackground.cs" />
      <Compile Include="Assets\Scripts\TutorialManager.cs" />
      <Compile Include="Assets\Scripts\TutorialManagerA.cs" />
-     <None Include="Assets\Metrics\Metrics_03-29-2014 17:30:07.txt" />
-     <None Include="Assets\Metrics\Metrics_03-30-2014 23:40:53.txt" />
-     <None Include="Assets\Metrics\Metrics_03-29-2014 17:30:33.txt" />
-     <None Include="Assets\Metrics\Metrics_03-29-2014 17:40:15.txt" />
-     <None Include="Assets\Metrics\Metrics_03-29-2014 17:30:24.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 09:00:40.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:54:55.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:49:13.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:56:56.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:50:56.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

@@ -73,10 +73,13 @@ public class Manager : MonoBehaviour
 		public GameObject target;
 		public GameObject targetIndicator;
 		public float targetIndicatorYPosition;
+		public GameObject metrics;
 
+	
 		// Use this for initialization
 		void Start ()
 		{
+				metrics = GameObject.Find ("Metrics");
 				birdInFront = 4;
 				birds.Add (bird0);
 				birds.Add (bird1);
@@ -99,8 +102,17 @@ public class Manager : MonoBehaviour
 				if (needsFadeToBlack == true) {
 						fadeBlack.SetActive (true);
 				}
-		}
+				if ((tutorialMode == true) && (avoidanceLevel == false)) {
+						metrics.GetComponent<Metrics> ().IncrementEnergyManagementTutorialAttempts ();
+				}
 
+				if ((tutorialMode == true) && (avoidanceLevel == true)) {
+						metrics.GetComponent<Metrics> ().IncrementCollissionAvoidanceTutorialAttempts ();
+						print ("incremented collission avoidance");
+				}
+		
+		}
+	
 		public int getMiddle ()
 		{
 				return Mathf.Min (birds.Count / 2);
@@ -118,7 +130,6 @@ public class Manager : MonoBehaviour
 										hasBeenLerped = true;
 								} else {
 										if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
-												print ("switching to next scene");
 												fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
 										}
 								}
@@ -128,7 +139,6 @@ public class Manager : MonoBehaviour
 				if ((tutorialMode == true) && (avoidanceLevel == true)) {
 						
 						if ((background.gameObject.transform.position.y <= completionMarker.gameObject.transform.position.y) && (birdDiedOnCollision == false)) {
-								print ("avoided obstacle");
 								//cycle success text, then reset the counter to prepare to load new scene
 								narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionAvoidanceMessage ();
 								succesfullyPassedVillage = true;
@@ -209,7 +219,6 @@ public class Manager : MonoBehaviour
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
-								print ("newlevelshouldappear");
 								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
 						}
 				}
@@ -222,7 +231,6 @@ public class Manager : MonoBehaviour
 						if (timeReset == false) {
 								time = 0;
 								timeReset = true;
-								print ("time should have been reset");
 						}
 				}
 		
@@ -230,13 +238,13 @@ public class Manager : MonoBehaviour
 						if (timeReset == false) {
 								time = 0;
 								timeReset = true;
-								print ("time should have been reset");
 								audio.PlayOneShot (success, 1);
 
 						}
 				}
 
 				if ((succesfullyPassedVillage == true) && (timeReset == true) && (time > 4.0f)) {
+						metrics.GetComponent<Metrics> ().MadeItPastVillage ();
 						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (4);
 				}
 
@@ -264,7 +272,6 @@ public class Manager : MonoBehaviour
 				int middle = getMiddle ();
 				birdIndex = birds.IndexOf (bird.gameObject);
 				bird.SetPosition (middle);
-				print ("bird position set to middle: " + middle);
 				if (birdIndex != middle) {
 						iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (birdIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 				} else {
@@ -332,7 +339,6 @@ public class Manager : MonoBehaviour
 		public void MoveBirdToBack (Bird bird, int vacatedPosition)
 //		public void MoveBirdToBack (int vacatedPosition)
 		{
-				print ("vacated position" + vacatedPosition);
 				if (vacatedPosition != getMiddle ()) {
 						
 //						iTween.MoveTo (birds [birdInFront], iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
@@ -382,7 +388,6 @@ public class Manager : MonoBehaviour
 		private IEnumerator SlowBackground ()
 		{
 		
-				print ("slowing has been called");
 				float deltaT = 0;
 		
 				slowing = true;
@@ -395,6 +400,7 @@ public class Manager : MonoBehaviour
 				slowing = false;
 		
 		}
+
 
 }
 

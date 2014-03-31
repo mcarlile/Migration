@@ -76,11 +76,13 @@ public class TutorialManager : MonoBehaviour
 		public bool puzzleAudioHasPlayed = false;
 		public bool movementAudioHasPlayed = false;
 		public bool slowing = false;
+		public GameObject metrics;
 
 	
 		// Use this for initialization
 		void Start ()
 		{
+				metrics = GameObject.Find ("Metrics");
 				rightBounds = tutorialBackground.GetComponent<TutorialBackground> ().rightBounds;
 				startTime = 0;
 				zoomedInCameraSize = mainCamera.orthographicSize;

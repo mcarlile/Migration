@@ -5,9 +5,20 @@ using System.IO;
 
 public class Metrics : MonoBehaviour
 {
+
 		public float currentLevel;
-		// Metrics-Gathering Method by Riley Pietsch
+		public bool madeItPastVillage = false;
+		public int energyManagementTutorialAttempts;
+		public int collissionAvoidancetTutorialAttempts;
+
 	
+		void Awake ()
+		{
+				DontDestroyOnLoad (this.gameObject);
+		}
+	
+		// Metrics-Gathering Method by Riley Pietsch
+
 		//IMPORTANT: You need to put "using System;" and "using System.IO;" at the top of your script!
 		void OnApplicationQuit ()
 		{
@@ -23,7 +34,10 @@ public class Metrics : MonoBehaviour
 //						"Any other metric: " + m_timeInAir);
 
 				string output = ("--Metric Data-- \n " +
-						"Current Level: " + currentLevel);
+						"Current Level: " + currentLevel + "\n" +
+						"Made it To Puzzle: " + madeItPastVillage + "\n" +
+						"Energy Management Tutorial Attempts: " + energyManagementTutorialAttempts + "\n" +
+						"Collission Avoidance Tutorial Attempts: " + collissionAvoidancetTutorialAttempts);
 		
 				//The "Metrics" folder in "Assets" needs to exist! Either create one or replace it with a name of another folder you have
 				FileStream fs = File.Create ("Assets/Metrics/" + fileName + ".txt"); //Need to close this after so something else (StreamWriter) can access it
@@ -34,6 +48,23 @@ public class Metrics : MonoBehaviour
 		}
 	
 		//IMPORTANT: You need to put "using System;" and "using System.IO;" at the top of your script!
+
+		public void MadeItPastVillage ()
+		{
+				madeItPastVillage = true;
+		}
+
+		public void IncrementEnergyManagementTutorialAttempts ()
+		{
+				energyManagementTutorialAttempts ++;
+		}
+
+		public void IncrementCollissionAvoidanceTutorialAttempts ()
+		{
+				collissionAvoidancetTutorialAttempts ++;
+		}
 }
+
+
 
 
