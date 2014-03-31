@@ -27,7 +27,6 @@ public class Manager : MonoBehaviour
 		public GameObject position6;
 		public GameObject position7;
 		public GameObject position8;
-		public GameObject position9;
 		public float time;
 		public float secondsBetweenHealthChange;
 		public int birdIndex;
@@ -212,14 +211,15 @@ public class Manager : MonoBehaviour
 				}
 				if (birds.Count == 0) {
 						if (tutorialMode == false) {
-								gameOver.SetActive (true);
+								//gameOver.SetActive (true);
 						}
 						flock.SetActive (false);
 						waitTimer = waitTimer + Time.deltaTime;
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
-								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
+								print ("loading scene: " + currentLevel);
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
 						}
 				}
 
