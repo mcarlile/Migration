@@ -167,7 +167,17 @@ public class Bird : MonoBehaviour
 								narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
 								manager.GetComponent<Manager> ().BirdDiedOnCollision ();
 						}
-			
+				}
+
+				if (otherCollider.tag.Equals ("Finish")) {
+						SendDeathData ();
+						print ("hit finish tag");
+						Destroy (gameObject);
+						manager.GetComponent<Manager> ().Hit2025FinishLine ();
+						if (tutorialMode == true) {
+								narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
+								manager.GetComponent<Manager> ().BirdDiedOnCollision ();
+						}
 				}
 		}
 	

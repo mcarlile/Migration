@@ -73,6 +73,7 @@ public class Manager : MonoBehaviour
 		public GameObject targetIndicator;
 		public float targetIndicatorYPosition;
 		public GameObject metrics;
+		public bool hit2025FinishLine = false;
 
 	
 		// Use this for initialization
@@ -121,15 +122,17 @@ public class Manager : MonoBehaviour
 		void Update ()
 		{
 				if (tutorialMode == false) {
-						if ((background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y)) {
-								if (hasBeenLerped != true) {
-										if (!slowing) {
-												StartCoroutine ("SlowBackground");
-										}
-										hasBeenLerped = true;
-								} else {
-										if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
-												fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+						if (hit2025FinishLine == false) {
+								if ((background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y)) {
+										if (hasBeenLerped != true) {
+												if (!slowing) {
+														StartCoroutine ("SlowBackground");
+												}
+												hasBeenLerped = true;
+										} else {
+												if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
+														fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+												}
 										}
 								}
 						}
@@ -219,7 +222,12 @@ public class Manager : MonoBehaviour
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
 								print ("loading scene: " + currentLevel);
-								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
+								if (hit2025FinishLine == false) {
+										fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
+								}
+								if (hit2025FinishLine == true) {
+										fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+								}
 						}
 				}
 
@@ -368,7 +376,7 @@ public class Manager : MonoBehaviour
 		{
 				birdDiedOnCollision = true;
 				narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
-				audio.PlayOneShot (failure, 1);
+//				audio.PlayOneShot (failure, 1);
 
 		}
 
@@ -401,6 +409,23 @@ public class Manager : MonoBehaviour
 		
 		}
 
+		public void Hit2025FinishLine ()
+		{
+				hit2025FinishLine = true;
+				print ("hit 2025 finish line");
+				if (timeReset == false) {
+						time = 0;
+						timeReset = true;
+				}
+				if ((!slowing) && (time > 5)) {
+						StartCoroutine ("SlowBackground");
+				} else {
+						if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+						}
+				}
+
+
+		}
 
 }
-
