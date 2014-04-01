@@ -74,6 +74,7 @@ public class Manager : MonoBehaviour
 		public float targetIndicatorYPosition;
 		public GameObject metrics;
 		public bool hit2025FinishLine = false;
+		public bool audioHasBeenPlayed = false;
 
 	
 		// Use this for initialization
@@ -395,6 +396,10 @@ public class Manager : MonoBehaviour
 
 		private IEnumerator SlowBackground ()
 		{
+			if (audioHasBeenPlayed == false) {
+				audio.PlayOneShot (success, 1);
+				audioHasBeenPlayed = true;
+			}
 		
 				float deltaT = 0;
 		
@@ -415,6 +420,7 @@ public class Manager : MonoBehaviour
 				print ("hit 2025 finish line");
 				if (timeReset == false) {
 						time = 0;
+			audio.PlayOneShot (success, 1);
 						timeReset = true;
 				}
 				if ((!slowing) && (time > 5)) {
