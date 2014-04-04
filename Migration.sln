@@ -5,6 +5,8 @@ Project("{19F59B74-448F-6A27-519D-B281A44E4B12}") = "Migration", "Assembly-CShar
 EndProject
 Project("{19F59B74-448F-6A27-519D-B281A44E4B12}") = "Migration", "Assembly-CSharp.csproj", "{836BB780-68F7-51B9-D3CB-D6C0D8236B49}"
 EndProject
+Project("{19F59B74-448F-6A27-519D-B281A44E4B12}") = "Migration", "Assembly-CSharp-Editor.csproj", "{D46B7372-FA6E-7884-C543-AE5B48E22267}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{836BB780-68F7-51B9-D3CB-D6C0D8236B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{836BB780-68F7-51B9-D3CB-D6C0D8236B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{836BB780-68F7-51B9-D3CB-D6C0D8236B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46B7372-FA6E-7884-C543-AE5B48E22267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46B7372-FA6E-7884-C543-AE5B48E22267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46B7372-FA6E-7884-C543-AE5B48E22267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46B7372-FA6E-7884-C543-AE5B48E22267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																												GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																			GlobalSection(MonoDevelopProperties) = preSolution
 =======
 			GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 39b9ec3c411b82f364912df7ef034edacbcb2b95
