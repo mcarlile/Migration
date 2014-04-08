@@ -192,7 +192,7 @@ public class TutorialManager : MonoBehaviour
 
 				if (readyToStart == true) {
 						bool timeReset = false;
-						if (timeReset = false) {
+						if (timeReset == false) {
 								time = 0;
 								timeReset = true;
 						}

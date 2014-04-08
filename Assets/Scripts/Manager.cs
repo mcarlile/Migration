@@ -352,8 +352,12 @@ public class Manager : MonoBehaviour
 						
 //						iTween.MoveTo (birds [birdInFront], iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 //						iTween.MoveTo (bird.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-						iTween.MoveTo (newBirdInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-
+						if (newBirdInFront != null) {			
+								iTween.MoveTo (newBirdInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+						}
+						if (newBirdInFront == null) {
+								print ("just tried to move a null newbirdinfront");
+						}
 //						iTween.MoveTo (birdToMoveBack.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 
 				} else {
@@ -396,10 +400,10 @@ public class Manager : MonoBehaviour
 
 		private IEnumerator SlowBackground ()
 		{
-			if (audioHasBeenPlayed == false) {
-				audio.PlayOneShot (success, 1);
-				audioHasBeenPlayed = true;
-			}
+				if (audioHasBeenPlayed == false) {
+						audio.PlayOneShot (success, 1);
+						audioHasBeenPlayed = true;
+				}
 		
 				float deltaT = 0;
 		
@@ -420,7 +424,7 @@ public class Manager : MonoBehaviour
 				print ("hit 2025 finish line");
 				if (timeReset == false) {
 						time = 0;
-			audio.PlayOneShot (success, 1);
+						audio.PlayOneShot (success, 1);
 						timeReset = true;
 				}
 				if ((!slowing) && (time > 5)) {
