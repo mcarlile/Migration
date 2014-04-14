@@ -17,7 +17,7 @@ public class Manager : MonoBehaviour
 		public GameObject bird8;
 		public int birdInFront;
 		public GameObject newBirdInFront;
-		public GameObject birdToMoveBack;
+		public int birdIndex;
 		public GameObject position0;
 		public GameObject position1;
 		public GameObject position2;
@@ -29,8 +29,6 @@ public class Manager : MonoBehaviour
 		public GameObject position8;
 		public float time;
 		public float secondsBetweenHealthChange;
-		public int birdIndex;
-		public GameObject indexBird;
 		public AudioClip dead;
 		public GameObject gameOver;
 		public GameObject gameWon;
@@ -75,6 +73,8 @@ public class Manager : MonoBehaviour
 		public GameObject metrics;
 		public bool hit2025FinishLine = false;
 		public bool audioHasBeenPlayed = false;
+		public 	GameObject theChoice;
+
 
 	
 		// Use this for initialization
@@ -153,8 +153,10 @@ public class Manager : MonoBehaviour
 				}
 
 				if ((startHealthDecrement == false) && (time > 5.0f)) {
-						narrativeManager.GetComponent<NarrativeManager> ().ClearMessages ();
-						startHealthDecrement = true;
+						if (tutorialMode == true) {
+								narrativeManager.GetComponent<NarrativeManager> ().ClearMessages ();
+								startHealthDecrement = true;
+						}
 				}
 
 				if ((startHealthDecrement == true) && (time > 2.0f)) {
@@ -178,8 +180,16 @@ public class Manager : MonoBehaviour
 				} else {
 						middle = (birds.Count / 2);
 				}
+//				newBirdInFront = GameObject.Find ("Bird" + birdInFront);
+				newBirdInFront = FindFrontByPos ();
+				if (newBirdInFront == null) {
+						if (birds.Count > 0) {
+								newBirdInFront = FindFrontByPos ();
+								print ("front bird by position called, frontbird is " + newBirdInFront);
+						}
+				}
+
 	
-				newBirdInFront = GameObject.Find ("Bird" + birdInFront);
 				//Every few seconds, the changehealth function is called, then the timer is reset
 				time = time + Time.deltaTime;
 				if (tutorialMode == true) {
@@ -208,7 +218,6 @@ public class Manager : MonoBehaviour
 						}
 				}
 
-				indexBird = GameObject.Find ("bird" + birdIndex);
 
 				if (birds.Count == 1) {
 						flockAudio.SetActive (false);
@@ -263,7 +272,22 @@ public class Manager : MonoBehaviour
 		
 		}
 	
+		GameObject FindFrontByPos ()
+		{
+				print ("called findfrontbypos");
+				float posY = -9999;
+//				GameObject theChoice;
+				for (int i=0; i<availablePositions.Count; i++) {
+						if (availablePositions [i] != null) {
+								if (birds [i].transform.position.y > posY) {
+										theChoice = birds [i];
+										posY = availablePositions [i].transform.position.y;
 	
+								}
+						}
+				}
+				return theChoice;
+		}
 	
 	
 
@@ -281,17 +305,23 @@ public class Manager : MonoBehaviour
 				int middle = getMiddle ();
 				birdIndex = birds.IndexOf (bird.gameObject);
 				bird.SetPosition (middle);
-				if (birdIndex != middle) {
-						iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (birdIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				} else {
-						iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				}
+//				if (birdIndex != middle) {
+//						if (birdIndex != 4) {
+//								iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (birdIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+				iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+//						}
+//						if (birdIndex == 4) {
+//								print ("move bird to front just tried to use a path 4 to 4 because birdIndex is 4");
+//						}
+//		å		} else {
+//						iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+//						print ("bird index equalled middle");
+//				}
 				//spotVacated = birdIndex;
-				MoveBirdToBack (birds [middle].GetComponent<Bird> (), spotVacated);
 
-//				MoveBirdToBack (bird, spotVacated);
-//				birdToMoveBack = bird;
+				MoveBirdToBack (birds [middle].GetComponent<Bird> (), spotVacated);
 				birdInFront = birdIndex;
+				print ("bird in front set to: " + birdInFront);
 
 
 				
@@ -299,11 +329,10 @@ public class Manager : MonoBehaviour
 
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
+				//play the death audio
 				audio.PlayOneShot (dead, 0.1f);
-
 				//Remove dead bird from birds List
 				birds.Remove (bird);
-//				birdToMoveBack = birds [getMiddle ()].GetComponent<Bird> ();
 				//Check to see how many birds remain in list and remove positions according to pattern 
 				//so that the positions at the rear are removed first and that the positions on the left are removed before positions on the right
 
@@ -339,36 +368,29 @@ public class Manager : MonoBehaviour
 						}
 						if (availablePositions [i] == position4) {
 								birdInFront = birds [i].GetComponent<Bird> ().birdNumber;
+								print ("destroyed bird and set birdInFront to: " + birdInFront);
+
 						}
 				}
 
-				birdToMoveBack = birds [middle];
+
 		} 
 
+
 		public void MoveBirdToBack (Bird bird, int vacatedPosition)
-//		public void MoveBirdToBack (int vacatedPosition)
 		{
 				if (vacatedPosition != getMiddle ()) {
-						
-//						iTween.MoveTo (birds [birdInFront], iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-//						iTween.MoveTo (bird.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 						if (newBirdInFront != null) {			
 								iTween.MoveTo (newBirdInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 						}
 						if (newBirdInFront == null) {
-								print ("just tried to move a null newbirdinfront");
+								print ("just tried to move a null newbirdinfront.  ");
 						}
-//						iTween.MoveTo (birdToMoveBack.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 
 				} else {
 						//do nothing because you can't click on the front bird
 				}
 				newBirdInFront.GetComponent<Bird> ().SetPosition (vacatedPosition);
-
-//				birds [middle].GetComponent<Bird> ().SetPosition (vacatedPosition);
-				//birdToMoveBack = bird.gameObject;
-//				birds [getMiddle ()].GetComponent<Bird> ().SetPosition (vacatedPosition);
-
 		}
 
 		public void SuccessfullyCompletedSwap ()
