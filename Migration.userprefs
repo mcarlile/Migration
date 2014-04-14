@@ -1,10 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PauseMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AudioController.cs">
     <Files>
-      <File FileName="../../College/Classes/Semester3/CTIN 483/Cat Game/CatGameGoldMaster/Assets/Scripts/Score.cs" Line="29" Column="75" />
       <File FileName="Assets/Scripts/AudioController.cs" Line="25" Column="1" />
-      <File FileName="Assets/Scripts/PauseMenu.cs" Line="31" Column="2" />
+      <File FileName="Assets/Scripts/PauseMenu.cs" Line="17" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

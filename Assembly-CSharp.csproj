@@ -46,13 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DoNotDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\A_Bird.cs" />
      <Compile Include="Assets\Scripts\A_Flock.cs" />
      <Compile Include="Assets\Scripts\AudioController.cs" />
      <Compile Include="Assets\Scripts\Background.cs" />
      <Compile Include="Assets\Scripts\Bird.cs" />
      <Compile Include="Assets\Scripts\CreditsManager.cs" />
+     <Compile Include="Assets\Scripts\DoNotDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\Flock.cs" />
      <Compile Include="Assets\Scripts\FlockTarget.cs" />
      <Compile Include="Assets\Scripts\Letter.cs" />
@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\Metrics.cs" />
      <Compile Include="Assets\Scripts\MoveCamera.cs" />
+     <Compile Include="Assets\Scripts\MusicAudio.cs" />
      <Compile Include="Assets\Scripts\NarrativeManager.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
@@ -110,6 +111,7 @@
      <None Include="Assets\Metrics\Metrics_04-13-2014 22:47:54.txt" />
      <None Include="Assets\Metrics\Metrics_03-31-2014 17:16:11.txt" />
      <None Include="Assets\Metrics\Metrics_04-13-2014 21:52:16.txt" />
+     <None Include="Assets\Metrics\Metrics_04-14-2014 11:00:52.txt" />
      <None Include="Assets\Metrics\Metrics_03-31-2014 17:32:55.txt" />
      <None Include="Assets\TransformUtilities\README.txt" />
      <None Include="Assets\Metrics\Metrics_04-13-2014 18:33:28.txt" />
