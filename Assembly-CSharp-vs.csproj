@@ -60,8 +60,8 @@
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\Metrics.cs" />
      <Compile Include="Assets\Scripts\MoveCamera.cs" />
-     <Compile Include="Assets\Scripts\MusicAudio.cs" />
      <Compile Include="Assets\Scripts\NarrativeManager.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
      <Compile Include="Assets\Scripts\SceneFadeOutIn.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
