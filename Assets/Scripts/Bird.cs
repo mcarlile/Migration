@@ -94,6 +94,7 @@ public class Bird : MonoBehaviour
 						Destroy (gameObject);
 						if (tutorialMode == true) {
 								narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
+								manager.GetComponent<Manager> ().BirdDiedFromExhaustion ();
 						}
 				}
 		
