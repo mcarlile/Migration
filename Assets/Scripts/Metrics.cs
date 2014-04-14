@@ -5,8 +5,6 @@ using System.IO;
 
 public class Metrics : MonoBehaviour
 {
-
-		public float currentLevel;
 		public bool madeItPastVillage = false;
 		public int energyManagementTutorialAttempts;
 		public int collissionAvoidancetTutorialAttempts;
@@ -34,8 +32,7 @@ public class Metrics : MonoBehaviour
 //						"Any other metric: " + m_timeInAir);
 
 				string output = ("--Metric Data-- \n " +
-						"Current Level: " + currentLevel + "\n" +
-						"Made it To Puzzle: " + madeItPastVillage + "\n" +
+						"Made it Past Village: " + madeItPastVillage + "\n" +
 						"Energy Management Tutorial Attempts: " + energyManagementTutorialAttempts + "\n" +
 						"Collission Avoidance Tutorial Attempts: " + collissionAvoidancetTutorialAttempts);
 		

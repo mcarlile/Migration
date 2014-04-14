@@ -223,7 +223,8 @@ public class TutorialManager : MonoBehaviour
 						}
 						if ((time > 0.5f) && (hasBeenLerped2 == true)) {
 								print ("should be skipping to next level");
-								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
+								Application.LoadLevel (2);
+								//fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
 						}
 				}
 		}

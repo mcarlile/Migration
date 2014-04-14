@@ -9,7 +9,7 @@ public class MainCamera : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				//movementSpeed = background.GetComponent<Background> ().movementSpeed;
+				movementSpeed = background.GetComponent<Background> ().movementSpeed;
 		}
 	
 		// Update is called once per frame

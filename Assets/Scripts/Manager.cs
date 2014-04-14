@@ -104,12 +104,17 @@ public class Manager : MonoBehaviour
 						fadeBlack.SetActive (true);
 				}
 				if ((tutorialMode == true) && (avoidanceLevel == false)) {
-						metrics.GetComponent<Metrics> ().IncrementEnergyManagementTutorialAttempts ();
+						if (metrics != null) {
+								metrics.GetComponent<Metrics> ().IncrementEnergyManagementTutorialAttempts ();
+						}
 				}
 
 				if ((tutorialMode == true) && (avoidanceLevel == true)) {
-						metrics.GetComponent<Metrics> ().IncrementCollissionAvoidanceTutorialAttempts ();
-						print ("incremented collission avoidance");
+						if (metrics != null) {
+
+								metrics.GetComponent<Metrics> ().IncrementCollissionAvoidanceTutorialAttempts ();
+								print ("incremented collission avoidance");
+						}
 				}
 		
 		}
@@ -253,7 +258,10 @@ public class Manager : MonoBehaviour
 				}
 
 				if ((succesfullyPassedVillage == true) && (timeReset == true) && (time > 4.0f)) {
-						metrics.GetComponent<Metrics> ().MadeItPastVillage ();
+						if (metrics != null) {
+
+								metrics.GetComponent<Metrics> ().MadeItPastVillage ();
+						}
 						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (4);
 				}
 

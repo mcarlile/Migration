@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Metrics.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager.cs" Line="223" Column="1" />
-      <File FileName="Assets/Scripts/Background.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="108" Column="27" />
+      <File FileName="Assets/Scripts/MainCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TutorialManager.cs" Line="79" Column="28" />
+      <File FileName="Assets/Scripts/Metrics.cs" Line="41" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
