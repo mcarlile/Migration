@@ -23,5 +23,9 @@ public class Timer : MonoBehaviour
 						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (levelToAdvanceTo);
 				}
 
+				if (Input.GetKey (KeyCode.Space)) {
+						time = 50;
+				}
+
 		}
 }

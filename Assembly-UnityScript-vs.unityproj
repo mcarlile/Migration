@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_0;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,8 +46,52 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MuUnitySingleton.js" />
-     <None Include="Assets\Plugins\TransformUtilities\README.txt" />
+     <Compile Include="Assets\FadeAudio.js" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:59:31.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 18:03:54.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 09:00:40.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 22:04:23.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 15:19:15.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 15:19:14.txt" />
+     <None Include="Assets\Metrics\Metrics_04-11-2014 10:20:36.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 17:53:47.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:19:49.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:12:44.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:54:55.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:32:32.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:59:55.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:33:01.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:51:27.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:49:13.txt" />
+     <None Include="Assets\Metrics\Metrics_04-10-2014 23:52:14.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 14:58:31.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 22:01:08.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 22:05:13.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:49:17.txt" />
+     <None Include="Assets\Metrics\Metrics_04-11-2014 09:47:39.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 09:22:25.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:49:49.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:28:52.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:35:00.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 16:15:57.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:31:38.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:43:21.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:16:11.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:52:16.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 17:32:55.txt" />
+     <None Include="Assets\TransformUtilities\README.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:33:28.txt" />
+     <None Include="Assets\Metrics\Metrics_04-11-2014 10:19:39.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 17:52:19.txt" />
+     <None Include="Assets\Metrics\Metrics_04-11-2014 10:11:19.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:49:41.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 22:00:20.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 22:02:10.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:56:56.txt" />
+     <None Include="Assets\Metrics\Metrics_03-31-2014 08:50:56.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 18:14:56.txt" />
+     <None Include="Assets\Metrics\Metrics_04-13-2014 21:49:35.txt" />
+     <None Include="Assets\Metrics\Metrics_04-11-2014 01:46:14.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
