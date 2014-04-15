@@ -102,6 +102,7 @@ public class Bird : MonoBehaviour
 	
 		void OnMouseOver ()
 		{
+				print ("over the bird");
 				gameObject.renderer.material.SetColor ("_Color", highlightedColor);
 				if ((Input.GetMouseButtonDown (0)) && (allowClick == true)) {
 						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);

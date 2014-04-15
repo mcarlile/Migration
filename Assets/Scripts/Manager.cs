@@ -75,6 +75,7 @@ public class Manager : MonoBehaviour
 		public bool audioHasBeenPlayed = false;
 		public 	GameObject theChoice;
 		public bool swapTutorialLevel;
+		public bool birdDiedFromExhaustion = false;
 	
 	
 	
@@ -205,8 +206,10 @@ public class Manager : MonoBehaviour
 												if (succesfullyPassedVillage == false) {
 														if (startHealthDecrement == true) {
 																if (birdDiedOnCollision == false) {
-																		ChangeHealth ();
-																		time = 0;
+																		if (birdDiedFromExhaustion == false) {
+																				ChangeHealth ();
+																				time = 0;
+																		}
 																}
 														}
 												}
@@ -257,6 +260,14 @@ public class Manager : MonoBehaviour
 								timeReset = true;
 						}
 				}
+
+				if (birdDiedFromExhaustion == true) {
+						if (timeReset == false) {
+								time = 0;
+								timeReset = true;
+						}
+				}
+
 		
 				if ((succesfullyPassedVillage) && (time > 5.0f)) {
 						if (timeReset == false) {
@@ -279,10 +290,14 @@ public class Manager : MonoBehaviour
 						}
 				}
 
-				if ((swapTutorialLevel == true) && (timeReset == true) && (time > 4.0f)) {
-						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
-								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
-						}
+//				if ((swapTutorialLevel == true) && (timeReset == true) && (time > 4.0f)) {
+//						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
+//								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
+//						}
+//				}
+
+				if ((birdDiedFromExhaustion == true) && (timeReset == true) && (time > 4.0f)) {
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
 				}
 		}
 	
@@ -426,7 +441,8 @@ public class Manager : MonoBehaviour
 
 		public void BirdDiedFromExhaustion ()
 		{
-				birdDiedOnCollision = true;
+				birdDiedFromExhaustion = true;
+//				birdDiedOnCollision = true;
 				print ("Bird died from exhaustion");
 
 		}

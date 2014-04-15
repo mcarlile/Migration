@@ -8,6 +8,8 @@ public class Timer : MonoBehaviour
 		public float advanceLevelTime;
 		public GameObject fadeBlack;
 		public int levelToAdvanceTo;
+		public bool startNextLevel = false;
+		public bool timeHasBeenReset = false;
 
 		// Use this for initialization
 		void Start ()
@@ -21,10 +23,20 @@ public class Timer : MonoBehaviour
 				time = time + Time.deltaTime;
 				if (time >= advanceLevelTime) {
 						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (levelToAdvanceTo);
+						print ("advancing to next level");
+
 				}
 
-				if (Input.GetKey (KeyCode.Space)) {
-						time = 50;
+				if (startNextLevel == true) {
+						if (timeHasBeenReset == false) {
+								time = 0;
+								timeHasBeenReset = true;
+						}
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (levelToAdvanceTo);
+						if ((time > advanceLevelTime + 2) && (timeHasBeenReset == true)) {
+								Application.LoadLevel (levelToAdvanceTo);
+						}
+						
 				}
 
 		}

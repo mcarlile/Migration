@@ -60,6 +60,8 @@ public class SceneFadeOutIn : MonoBehaviour
 	
 		public void EndScene (int sceneToLoad)
 		{
+				print ("EndScene has been called");
+
 				// Make sure the texture is enabled.
 				guiTexture.enabled = true;
 		
@@ -70,5 +72,6 @@ public class SceneFadeOutIn : MonoBehaviour
 				if (guiTexture.color.a >= 0.95f)
 			// ... reload the level.
 						Application.LoadLevel (sceneToLoad);
+				print ("scene to load has been loaded");
 		}
 }
