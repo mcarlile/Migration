@@ -1,4 +1,0 @@
---Metric Data-- 
- Made it Past Village: False
-Energy Management Tutorial Attempts: 1
-Collission Avoidance Tutorial Attempts: 0
