@@ -16,7 +16,7 @@ public class CreditsManager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				if (camera.transform.position.y <= bottomBounds.transform.position.y) {
+				if (camera.transform.position.y >= bottomBounds.transform.position.y) {
 						Application.Quit ();
 				}
 		}
