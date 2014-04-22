@@ -102,7 +102,6 @@ public class Bird : MonoBehaviour
 	
 		void OnMouseOver ()
 		{
-				print ("over the bird");
 				gameObject.renderer.material.SetColor ("_Color", highlightedColor);
 				if ((Input.GetMouseButtonDown (0)) && (allowClick == true)) {
 						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
@@ -132,27 +131,67 @@ public class Bird : MonoBehaviour
 				//Birds in the back of the flock increase their health over time while birds
 				//in the front of the flock decrease their health. The more close to either
 				//the front or the back, the more extreme the change
+
+				if (manager.GetComponent<Manager> ().birds.Count >= 8) {
+						if (((birdPosition == 0) || (birdPosition == 8)) && (health <= 5)) {
+								health = health + 2;
+						}
 		
-				if (((birdPosition == 0) || (birdPosition == 8)) && (health <= 5)) {
-						health = health + 2;
-				}
+						if (((birdPosition == 1) || (birdPosition == 7)) && (health <= 5)) {
+								health = health + 1;
+						}
 		
-				if (((birdPosition == 1) || (birdPosition == 7)) && (health <= 5)) {
-						health = health + 1;
-				}
-		
-				if (((birdPosition == 2) || (birdPosition == 6)) && (health <= 5)) {
-				}
-		
-				if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
-						health = health + 0.7;
-				}
-				if (birdPosition == 4) {
+						if (((birdPosition == 2) || (birdPosition == 6)) && (health <= 5)) {
+								health = health + 0.7;
+						}
 			
-						//				if ((birdPosition == 4) && (health >= 2)) {
-						health = health - 0.5;
+						if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
+						}
+						if (birdPosition == 4) {
+								health = health - 0.5;
+						}
+						ChangeHealthMeterColor ();
 				}
-				ChangeHealthMeterColor ();
+				if ((manager.GetComponent<Manager> ().birds.Count == 6) || (manager.GetComponent<Manager> ().birds.Count == 7)) {
+						if (((birdPosition == 1) || (birdPosition == 7)) && (health <= 5)) {
+								health = health + 2;
+						}
+			
+						if (((birdPosition == 2) || (birdPosition == 6)) && (health <= 5)) {
+								health = health + 1;
+						}
+			
+						if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
+						}
+						if (birdPosition == 4) {
+								health = health - 0.5;
+						}
+						ChangeHealthMeterColor ();
+				}
+
+				if ((manager.GetComponent<Manager> ().birds.Count == 4) || (manager.GetComponent<Manager> ().birds.Count == 5)) {
+						if (((birdPosition == 2) || (birdPosition == 6)) && (health <= 5)) {
+								health = health + 2;
+						}
+			
+						if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
+								health = health + 0.7;
+						}
+						if (birdPosition == 4) {
+								health = health - 0.5;
+						}
+						ChangeHealthMeterColor ();
+				}
+				if (manager.GetComponent<Manager> ().birds.Count < 4) {
+						if (((birdPosition == 3) || (birdPosition == 5)) && (health <= 5)) {
+								health = health + 0.7;
+						}
+						if (birdPosition == 4) {
+								health = health - 0.5;
+						}
+						ChangeHealthMeterColor ();
+				}
+		
 		}
 	
 		void SendDeathData ()
@@ -173,7 +212,6 @@ public class Bird : MonoBehaviour
 
 				if (otherCollider.tag.Equals ("Finish")) {
 						SendDeathData ();
-						print ("hit finish tag");
 						Destroy (gameObject);
 						manager.GetComponent<Manager> ().Hit2025FinishLine ();
 						if (tutorialMode == true) {

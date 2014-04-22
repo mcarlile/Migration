@@ -21,30 +21,15 @@ public class PauseButton : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-//				if (Input.GetKeyUp (KeyCode.P)) {
 				if (gamePaused) {
 						play.gameObject.renderer.enabled = true;
 						pause.gameObject.renderer.enabled = false;
-
-
-//						gamePaused = false;
 						Time.timeScale = 0.0f;
 				} else {
 						pause.gameObject.renderer.enabled = true;
 						play.gameObject.renderer.enabled = false;
-
-
-//						gamePaused = true;
 						Time.timeScale = 1.0f;
 				}			
-//				}
-				if (Input.GetKeyDown ("r")) {
-						Application.LoadLevel (Application.loadedLevel);
-				}
-				if (Input.GetKeyDown ("q")) {
-						Application.LoadLevel ("12_credits");
-						//			Application.Quit(); 
-				}
 		}
 
 		void OnMouseOver ()
