@@ -76,6 +76,8 @@ public class TutorialManagerA : MonoBehaviour
 		public float fadeTime;
 		bool canSkipAhead = false;
 		public AudioClip startled;
+		public float birdMovementSpeed;
+
 
 	
 		// Use this for initialization
@@ -216,9 +218,9 @@ public class TutorialManagerA : MonoBehaviour
 				letterIndex = letters.IndexOf (letter.gameObject);
 				letter.SetPosition (middle);
 				if (letterIndex != middle) {
-						iTween.MoveTo (letters [letterIndex], iTween.Hash ("path", iTweenPath.GetPath (letterIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+						iTween.MoveTo (letters [letterIndex], iTween.Hash ("path", iTweenPath.GetPath (letterIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", birdMovementSpeed));
 				} else {
-						iTween.MoveTo (letters [letterIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+						iTween.MoveTo (letters [letterIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", birdMovementSpeed));
 				}
 				//spotVacated = birdIndex;
 				MoveLetterToBack (letters [middle].GetComponent<Letter> (), spotVacated);

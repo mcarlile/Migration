@@ -29,7 +29,6 @@ public class MusicAudio : MonoBehaviour
 						playTrack3 = false;
 						playTrack4 = false;
 						playTrack5 = false;
-						print ("playing track 1");
 				} else {
 						track1.audio.volume = 0;
 				}

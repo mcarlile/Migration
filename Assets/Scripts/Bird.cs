@@ -266,4 +266,9 @@ public class Bird : MonoBehaviour
 				allowClick = true;
 		}
 
+		public void DisableClick ()
+		{
+				allowClick = false;
+		}
+
 }

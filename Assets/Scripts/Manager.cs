@@ -76,6 +76,7 @@ public class Manager : MonoBehaviour
 		public 	GameObject theChoice;
 		public bool swapTutorialLevel;
 		public bool birdDiedFromExhaustion = false;
+		public float birdMovementSpeed;
 	
 	
 	
@@ -129,6 +130,7 @@ public class Manager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+	
 				if (tutorialMode == false) {
 						if (hit2025FinishLine == false) {
 								if ((background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y)) {
@@ -188,15 +190,10 @@ public class Manager : MonoBehaviour
 						middle = (birds.Count / 2);
 				}
 				//				newBirdInFront = GameObject.Find ("Bird" + birdInFront);
-				newBirdInFront = FindFrontByPos ();
-				if (newBirdInFront == null) {
-						if (birds.Count > 0) {
-								newBirdInFront = FindFrontByPos ();
-								print ("front bird by position called, frontbird is " + newBirdInFront);
-						}
-				}
-		
-		
+
+				//	newBirdInFront = FindFrontByPos ();
+//				FindFrontByPos ();
+
 				//Every few seconds, the changehealth function is called, then the timer is reset
 				time = time + Time.deltaTime;
 				if (tutorialMode == true) {
@@ -217,9 +214,7 @@ public class Manager : MonoBehaviour
 								}
 						}
 				}
-		
-		
-		
+
 				if (tutorialMode == false) {
 						if (time >= secondsBetweenHealthChange) {
 								ChangeHealth ();
@@ -301,29 +296,21 @@ public class Manager : MonoBehaviour
 				}
 		}
 	
-		GameObject FindFrontByPos ()
+		void FindFrontByPos ()
 		{
-//				print ("called findfrontbypos");
-				float posY = -9999;
-				//				GameObject theChoice;
-//				if (birds.Count > 0) {
+				GameObject tempChoice = bird4;
 				for (int i=0; i<availablePositions.Count; i++) {
 						if (availablePositions [i] != null) {
 								if (birds.Count != 0) {
-										if (birds [i].transform.position.y > posY) {
-												theChoice = birds [i];
-												posY = availablePositions [i].transform.position.y;
+										if (birds [i].transform.position.y > 24) {
+												tempChoice = birds [i];
 										}
 								}
 						}
 				}
-				return theChoice;
-				print ("the choice: " + theChoice);
-//				}
+				newBirdInFront = tempChoice;
 		}
-	
-	
-	
+
 		void ChangeHealth ()
 		{
 				for (int i=0; i<birds.Count; i++) {
@@ -335,35 +322,30 @@ public class Manager : MonoBehaviour
 	
 		public void MoveBirdToFront (Bird bird, int spotVacated)
 		{
+				DisableBirdsToBeClicked ();
+				StartCoroutine (WaitAndAllowClick (birdMovementSpeed));
+				FindFrontByPos ();
 				int middle = getMiddle ();
 				birdIndex = birds.IndexOf (bird.gameObject);
-//				bird.SetPosition (middle);
 				bird.SetPosition (4);
-
-				//				if (birdIndex != middle) {
-				//						if (birdIndex != 4) {
-				//								iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (birdIndex + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				//						}
-				//						if (birdIndex == 4) {
-				//								print ("move bird to front just tried to use a path 4 to 4 because birdIndex is 4");
-				//						}
-				//		å		}  else {
-				//						iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				//						print ("bird index equalled middle");
-				//				}
-				//spotVacated = birdIndex;
-		
-//				MoveBirdToBack (birds [middle].GetComponent<Bird> (), spotVacated);
-				MoveBirdToBack (birds [middle].GetComponent<Bird> (), spotVacated);
-
-//				birdInFront = birdIndex;
+				iTween.MoveTo (birds [birdIndex], iTween.Hash ("path", iTweenPath.GetPath (spotVacated + "to4"), "easetype", iTween.EaseType.easeInOutSine, "time", birdMovementSpeed));
+				MoveBirdToBack (newBirdInFront.GetComponent<Bird> (), spotVacated);
 				print ("bird in front set to: " + birdInFront);
-		
-		
-		
 		}
-	
+
+		public void MoveBirdToBack (Bird bird, int vacatedPosition)
+		{
+				if (newBirdInFront != null) {			
+						iTween.MoveTo (newBirdInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", birdMovementSpeed));
+				}
+				if (newBirdInFront == null) {
+						print ("just tried to move a null newbirdinfront.  ");
+				} else {
+						//do nothing because you can't click on the front bird
+				}
+				newBirdInFront.GetComponent<Bird> ().SetPosition (vacatedPosition);
+		}
+
 		public void DestroyBird (GameObject bird, int spotVacated)
 		{
 				//play the death audio
@@ -397,10 +379,12 @@ public class Manager : MonoBehaviour
 				if (birds.Count == 1) {
 						availablePositions.Remove (position5);
 				}
+				DisableBirdsToBeClicked ();
+				StartCoroutine (WaitAndAllowClick (birdMovementSpeed));
 				//for each bird that still exists in the list, 
 				for (int i=0; i<birds.Count; i++) {
 						if (availablePositions [i] != null) {
-								iTween.MoveTo (birds [i].gameObject, iTween.Hash ("position", availablePositions [i].transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
+								iTween.MoveTo (birds [i].gameObject, iTween.Hash ("position", availablePositions [i].transform.position, "easetype", iTween.EaseType.easeInOutSine, "time", birdMovementSpeed));
 								birds [i].GetComponent<Bird> ().SetPosition (availablePositions [i].GetComponent<Position> ().positionNumber);
 						}
 						if (availablePositions [i] == position4) {
@@ -412,24 +396,6 @@ public class Manager : MonoBehaviour
 		
 		
 		}  
-	
-	
-		public void MoveBirdToBack (Bird bird, int vacatedPosition)
-		{
-//				if (vacatedPosition != getMiddle ()) {
-				if (newBirdInFront != null) {			
-						iTween.MoveTo (newBirdInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
-				}
-				if (newBirdInFront == null) {
-						print ("just tried to move a null newbirdinfront.  ");
-				}
-			
-//				}
-	else {
-						//do nothing because you can't click on the front bird
-				}
-				newBirdInFront.GetComponent<Bird> ().SetPosition (vacatedPosition);
-		}
 	
 		public void SuccessfullyCompletedSwap ()
 		{
@@ -455,15 +421,64 @@ public class Manager : MonoBehaviour
 	
 		public void AllowBirdsToBeClicked ()
 		{
-				bird0.GetComponent<Bird> ().AllowClick ();
-				bird1.GetComponent<Bird> ().AllowClick ();
-				bird2.GetComponent<Bird> ().AllowClick ();
-				bird3.GetComponent<Bird> ().AllowClick ();
-				bird4.GetComponent<Bird> ().AllowClick ();
-				bird5.GetComponent<Bird> ().AllowClick ();
-				bird6.GetComponent<Bird> ().AllowClick ();
-				bird7.GetComponent<Bird> ().AllowClick ();
-				bird8.GetComponent<Bird> ().AllowClick ();
+				if (bird0 != null) {
+						bird0.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird1 != null) {
+						bird1.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird2 != null) {
+						bird2.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird3 != null) {
+						bird3.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird4 != null) {
+						bird4.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird5 != null) {
+						bird5.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird6 != null) {
+						bird6.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird7 != null) {
+						bird7.GetComponent<Bird> ().AllowClick ();
+				}
+				if (bird8 != null) {
+						bird8.GetComponent<Bird> ().AllowClick ();
+				}
+		}
+
+		public void DisableBirdsToBeClicked ()
+		{
+				if (bird0 != null) {
+						bird0.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird1 != null) {
+						bird1.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird2 != null) {
+						bird2.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird3 != null) {
+						bird3.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird4 != null) {
+						bird4.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird5 != null) {
+						bird5.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird6 != null) {
+						bird6.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird7 != null) {
+						bird7.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird8 != null) {
+						bird8.GetComponent<Bird> ().DisableClick ();
+				}
 		}
 	
 		private IEnumerator SlowBackground ()
@@ -502,8 +517,15 @@ public class Manager : MonoBehaviour
 								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
 						}
 				}
-		
-		
+
+		}
+
+		IEnumerator WaitAndAllowClick (float waitTime)
+		{
+				print ("wait and allow click called");
+				yield return new WaitForSeconds (waitTime);
+				AllowBirdsToBeClicked ();
+				print ("Waited for two seconds and now clicks are allowed");
 		}
 	
 }
