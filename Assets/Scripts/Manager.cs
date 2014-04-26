@@ -77,7 +77,7 @@ public class Manager : MonoBehaviour
 		public bool swapTutorialLevel;
 		public bool birdDiedFromExhaustion = false;
 		public float birdMovementSpeed;
-	
+
 	
 	
 		// Use this for initialization
@@ -215,12 +215,12 @@ public class Manager : MonoBehaviour
 						}
 				}
 
-				if (tutorialMode == false) {
-						if (time >= secondsBetweenHealthChange) {
-								ChangeHealth ();
-								time = 0;
-						}
-				}
+//				if (tutorialMode == false) {
+//						if (time >= secondsBetweenHealthChange) {
+//								ChangeHealth ();
+//								time = 0;
+//						}
+//				}
 		
 		
 				if (birds.Count == 1) {
@@ -315,7 +315,7 @@ public class Manager : MonoBehaviour
 		{
 				for (int i=0; i<birds.Count; i++) {
 						if (birds [i] != null) {
-								birds [i].gameObject.GetComponent<Bird> ().ChangeHealth ();
+//								birds [i].gameObject.GetComponent<Bird> ().ChangeHealth ();
 						}
 				}
 		}
