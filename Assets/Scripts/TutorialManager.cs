@@ -114,6 +114,13 @@ public class TutorialManager : MonoBehaviour
 				letter6.renderer.material.SetColor ("_Color", deselectedColor);
 				letter7.renderer.material.SetColor ("_Color", deselectedColor);
 				letter8.renderer.material.SetColor ("_Color", deselectedColor);
+				if (!fading) {
+						StartCoroutine ("FadeIn", fadeDuration);
+				
+				}
+				hasBeenFaded = true;
+				waitTimer = 1;
+				
 		}
 	
 		public int getMiddle ()
@@ -408,6 +415,29 @@ public class TutorialManager : MonoBehaviour
 				}
 				scaling = false;
 		
+		}
+
+		private IEnumerator FadeIn (float fadeInDuration)
+		{
+				print ("fade in has been called");
+		
+				float deltaT = 0;
+		
+				fading = true;
+				while (deltaT < fadeDuration) {
+						deltaT += Time.deltaTime;
+						yield return true;
+						iTween.FadeTo (letter0.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter1.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter2.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter3.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter4.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter5.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter6.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter7.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+						iTween.FadeTo (letter8.gameObject, iTween.Hash ("alpha", 255, "time", fadeInDuration));
+				}
+				fading = false;
 		}
 	
 

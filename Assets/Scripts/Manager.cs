@@ -276,6 +276,7 @@ public class Manager : MonoBehaviour
 						if (metrics != null) {
 								metrics.GetComponent<Metrics> ().MadeItPastVillage ();
 								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (4);
+								print (" successfully passed village, ending scene");
 						}
 		
 						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
@@ -520,10 +521,8 @@ public class Manager : MonoBehaviour
 
 		IEnumerator WaitAndAllowClick (float waitTime)
 		{
-				print ("wait and allow click called");
 				yield return new WaitForSeconds (waitTime);
 				AllowBirdsToBeClicked ();
-				print ("Waited for two seconds and now clicks are allowed");
 		}
 	
 }

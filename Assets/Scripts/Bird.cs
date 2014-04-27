@@ -42,49 +42,57 @@ public class Bird : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-
-//				healthIndicatorAlpha.renderer.material.color -= new Color (0, 0, 0, .10f);
-
-				if (birdPosition == 4) {
-						health = (health - ((Time.deltaTime) * position4HealthChangeMultiplier));
-				}
-
-				if (((birdPosition == 3) || (birdPosition == 5))) {
-						if (health < 100) {
-								health = (health + ((Time.deltaTime) * position3HealthChangeMultiplier));
+				if (manager.GetComponent<Manager> ().avoidanceLevel == false) {
+						if (birdPosition == 4) {
+								health = (health - ((Time.deltaTime) * position4HealthChangeMultiplier));
 						}
-				}
 
-				if (((birdPosition == 2) || (birdPosition == 6))) {
-						if (health < 100) {
-
-								health = (health + ((Time.deltaTime) * position2HealthChangeMultiplier));
+						if (((birdPosition == 3) || (birdPosition == 5))) {
+								if (health < 100) {
+										health = (health + ((Time.deltaTime) * position3HealthChangeMultiplier));
+								}
 						}
-				}
 
-				if (((birdPosition == 1) || (birdPosition == 7))) {
-						if (health < 100) {
+						if (((birdPosition == 2) || (birdPosition == 6))) {
+								if (health < 100) {
 
-								health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+										health = (health + ((Time.deltaTime) * position2HealthChangeMultiplier));
+								}
 						}
-				}
 
-				if (((birdPosition == 0) || (birdPosition == 8))) {
-						if (health < 100) {
+						if (((birdPosition == 1) || (birdPosition == 7))) {
+								if (health < 100) {
 
-								health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+										health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+								}
 						}
-				}
+
+						if (((birdPosition == 0) || (birdPosition == 8))) {
+								if (health < 100) {
+
+										health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+								}
+						}
 		
-				if (health <= 0) {
-						SendDeathData ();
-						Destroy (gameObject);
-						if (tutorialMode == true) {
-								narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
-								manager.GetComponent<Manager> ().BirdDiedFromExhaustion ();
+						if (health <= 0) {
+								SendDeathData ();
+								Destroy (gameObject);
+								if (tutorialMode == true) {
+										narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
+										manager.GetComponent<Manager> ().BirdDiedFromExhaustion ();
+								}
 						}
 				}
-		
+
+				if (manager.GetComponent<Manager> ().swapTutorialLevel == true) {
+						if (health < 70) {
+								if (healthMessageTriggered == false) {
+										narrativeManager.GetComponent<NarrativeManager> ().ShowLowHealthMessage ();
+										healthMessageTriggered = true;
+								}
+						}
+				}
+				
 		}
 	
 		void OnMouseOver ()
@@ -97,7 +105,7 @@ public class Bird : MonoBehaviour
 						manager.GetComponent<Manager> ().MoveBirdToFront (this, birdPosition);
 						audio.PlayOneShot (startledSounds [Random.Range (0, 3)], 1);
 
-						if (tutorialMode == true) {
+						if (manager.GetComponent<Manager> ().swapTutorialLevel == true) {
 								narrativeManager.GetComponent<NarrativeManager> ().ShowSwapSuccessMessage ();
 								manager.GetComponent <Manager> ().SuccessfullyCompletedSwap ();
 						}

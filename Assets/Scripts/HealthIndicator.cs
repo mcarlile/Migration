@@ -32,8 +32,6 @@ public class HealthIndicator : MonoBehaviour
 		{
 				if (bird.GetComponent<Bird> ().health > 90) {
 						gameObject.renderer.material.SetColor ("_Color", health10);
-
-						print ("set to health10");
 				}
 
 				if ((bird.GetComponent<Bird> ().health > 80) && (bird.GetComponent<Bird> ().health <= 90)) {

@@ -142,16 +142,6 @@ public class TutorialManagerA : MonoBehaviour
 										hasBeenFaded = true;
 										waitTimer = 1;
 								}
-
-								letter0text.text = ("T");
-								letter1text.text = ("A");
-								letter2text.text = ("R");
-								letter3text.text = ("I");
-								letter4text.text = ("G");
-								letter5text.text = ("I");
-								letter6text.text = ("N");
-								letter7text.text = ("M");
-								letter8text.text = ("O");
 								canSkipAhead = true;
 						}
 						if (canSkipAhead == true) {
