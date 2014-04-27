@@ -7,6 +7,8 @@ public class ReloadButton : MonoBehaviour
 		public GameObject manager;
 		public GameObject deselectedReloadButton;
 		public GameObject selectedReloadButton;
+		public AudioClip hover;
+
 
 		// Use this for initialization
 		void Start ()
@@ -33,5 +35,10 @@ public class ReloadButton : MonoBehaviour
 		{
 				selectedReloadButton.gameObject.renderer.enabled = true;
 				deselectedReloadButton.gameObject.renderer.enabled = false;
+		}
+
+		void OnMouseEnter ()
+		{
+				audio.PlayOneShot (hover, 1f);
 		}
 }

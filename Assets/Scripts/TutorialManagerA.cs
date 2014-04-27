@@ -132,16 +132,16 @@ public class TutorialManagerA : MonoBehaviour
 
 						if (Input.GetKeyDown (KeyCode.Space)) {
 								instructionsText.gameObject.SetActive (false);
-								audio.PlayOneShot (startled, 1);
+								audio.PlayOneShot (startled, 0.2f);
 								StartCoroutine ("MoveToV");
-//								if (hasBeenFaded != true) {
-//										if (!fading) {
-//												StartCoroutine ("FadeOut", fadeDuration);
-//					
-//										}
-//										hasBeenFaded = true;
-//										waitTimer = 1;
-//								}
+								if (hasBeenFaded != true) {
+										if (!fading) {
+												StartCoroutine ("FadeOut", fadeDuration);
+					
+										}
+										hasBeenFaded = true;
+										waitTimer = 1;
+								}
 
 								letter0text.text = ("T");
 								letter1text.text = ("A");

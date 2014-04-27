@@ -10,6 +10,8 @@ public class PauseButton : MonoBehaviour
 		public GameObject playDeslected;
 		public bool allowClick = true;
 		public bool gamePaused = false;
+		public AudioClip hover;
+
 
 
 		// Use this for initialization
@@ -64,5 +66,10 @@ public class PauseButton : MonoBehaviour
 						pause.gameObject.renderer.enabled = true;
 						pauseDeslected.gameObject.renderer.enabled = false;
 				}
+		}
+
+		void OnMouseEnter ()
+		{
+				audio.PlayOneShot (hover, 1f);
 		}
 }

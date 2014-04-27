@@ -6,11 +6,19 @@ public class AudioController : MonoBehaviour
 
 		public int trackToPlay;
 		public GameObject audio;
+		public GameObject gameAudio;
+
 	
 		// Use this for initialization
 		void Start ()
 		{
+				if (GameObject.Find ("Audio") == null) {
+						Instantiate (gameAudio);
+						audio = GameObject.Find ("Audio(Clone)");
+
+				}
 				audio = GameObject.Find ("Audio");
+
 
 		}
 	
@@ -30,6 +38,7 @@ public class AudioController : MonoBehaviour
 						if (trackToPlay == 5) {
 								audio.GetComponent<MusicAudio> ().PlayTrack5 ();
 						}
+
 				}
 		}
 }

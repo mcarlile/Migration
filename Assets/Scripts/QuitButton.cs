@@ -7,6 +7,9 @@ public class QuitButton : MonoBehaviour
 		public GameObject manager;
 		public GameObject deselectedQuitButton;
 		public GameObject selectedQuitButton;
+		public AudioClip hover;
+
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -33,5 +36,10 @@ public class QuitButton : MonoBehaviour
 		{
 				selectedQuitButton.gameObject.renderer.enabled = true;
 				deselectedQuitButton.gameObject.renderer.enabled = false;
+		}
+
+		void OnMouseEnter ()
+		{
+				audio.PlayOneShot (hover, 1f);
 		}
 }

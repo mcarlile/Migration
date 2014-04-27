@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class Bird : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class Bird : MonoBehaviour
 		public int position2HealthChangeMultiplier = 10;
 		public int position3HealthChangeMultiplier = 5 ;
 		public int position4HealthChangeMultiplier = 20;
+		public List<AudioClip> startledSounds = new List<AudioClip> ();
+		public AudioClip hover;
+
 	
 		// Use this for initialization
 		void Start ()
@@ -84,11 +89,14 @@ public class Bird : MonoBehaviour
 	
 		void OnMouseOver ()
 		{
+				bool playedHoverSong = false;
 				gameObject.renderer.material.SetColor ("_Color", highlightedColor);
+
 				if ((Input.GetMouseButtonDown (0)) && (allowClick == true)) {
 						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
 						manager.GetComponent<Manager> ().MoveBirdToFront (this, birdPosition);
-						audio.PlayOneShot (startled, 1);
+						audio.PlayOneShot (startledSounds [Random.Range (0, 3)], 1);
+
 						if (tutorialMode == true) {
 								narrativeManager.GetComponent<NarrativeManager> ().ShowSwapSuccessMessage ();
 								manager.GetComponent <Manager> ().SuccessfullyCompletedSwap ();

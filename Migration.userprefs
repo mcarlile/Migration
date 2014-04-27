@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Letter.cs">
     <Files>
-      <File FileName="Assets/Scripts/Bird.cs" Line="14" Column="29" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="504" Column="35" />
-      <File FileName="Assets/HealthIndicator.cs" Line="33" Column="22" />
+      <File FileName="Assets/Scripts/Bird.cs" Line="98" Column="58" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="3" Column="14" />
+      <File FileName="Assets/Scripts/AudioController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NarrativeManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TutorialManager.cs" Line="54" Column="14" />
+      <File FileName="Assets/Scripts/Letter.cs" Line="27" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

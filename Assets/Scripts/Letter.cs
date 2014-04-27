@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class Letter : MonoBehaviour
 {
@@ -11,8 +13,9 @@ public class Letter : MonoBehaviour
 		public GameObject tutorialManager;
 		public int letterNumber;
 		public int letterPosition;
-		public AudioClip startled;
 		public AudioClip dead;
+		public List<AudioClip> startledSounds = new List<AudioClip> ();
+
 	
 	
 		// Use this for initialization
@@ -34,7 +37,8 @@ public class Letter : MonoBehaviour
 				if ((Input.GetMouseButtonDown (0))) {
 						//manager.GetComponent<Manager> ().MoveBirdToFront (birdNumber, birdPosition);
 						tutorialManager.GetComponent<TutorialManager> ().MoveLetterToFront (this, letterPosition);
-						audio.PlayOneShot (startled, 1);
+						audio.PlayOneShot (startledSounds [Random.Range (0, 3)], 1);
+
 				}
 		}
 	

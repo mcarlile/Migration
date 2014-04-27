@@ -77,12 +77,14 @@ public class Manager : MonoBehaviour
 		public bool swapTutorialLevel;
 		public bool birdDiedFromExhaustion = false;
 		public float birdMovementSpeed;
+		public GameObject gameAudio;
 
 	
 	
 		// Use this for initialization
 		void Start ()
 		{
+
 				metrics = GameObject.Find ("Metrics");
 				birdInFront = 4;
 				birds.Add (bird0);
@@ -189,10 +191,6 @@ public class Manager : MonoBehaviour
 				} else {
 						middle = (birds.Count / 2);
 				}
-				//				newBirdInFront = GameObject.Find ("Bird" + birdInFront);
-
-				//	newBirdInFront = FindFrontByPos ();
-//				FindFrontByPos ();
 
 				//Every few seconds, the changehealth function is called, then the timer is reset
 				time = time + Time.deltaTime;
@@ -285,11 +283,11 @@ public class Manager : MonoBehaviour
 						}
 				}
 
-//				if ((swapTutorialLevel == true) && (timeReset == true) && (time > 4.0f)) {
-//						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
-//								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
-//						}
-//				}
+				if ((swapTutorialLevel == true) && (timeReset == true) && (time > 4.0f)) {
+						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
+						}
+				}
 
 				if ((birdDiedFromExhaustion == true) && (timeReset == true) && (time > 4.0f)) {
 						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
