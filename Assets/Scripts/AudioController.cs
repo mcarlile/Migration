@@ -20,6 +20,7 @@ public class AudioController : MonoBehaviour
 				audio = GameObject.Find ("Audio");
 
 
+
 		}
 	
 		// Update is called once per frame

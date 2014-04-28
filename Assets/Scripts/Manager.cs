@@ -33,7 +33,6 @@ public class Manager : MonoBehaviour
 		public AudioClip dead;
 		public GameObject gameOver;
 		public GameObject gameWon;
-		public GameObject flockAudio;
 		public List<GameObject> birds = new List<GameObject> ();
 		public List<GameObject> availablePositions = new List<GameObject> ();
 		public int respawnTimeAfterDeath;
@@ -78,7 +77,7 @@ public class Manager : MonoBehaviour
 		public bool birdDiedFromExhaustion = false;
 		public float birdMovementSpeed;
 		public GameObject gameAudio;
-
+		public float audioFadeSpeed;
 	
 	
 		// Use this for initialization
@@ -121,8 +120,11 @@ public class Manager : MonoBehaviour
 								print ("incremented collission avoidance");
 						}
 				}
-		
+
+						
+				
 		}
+		
 	
 		public int getMiddle ()
 		{
@@ -132,6 +134,25 @@ public class Manager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+				if (gameAudio == null) {
+						if (currentLevel == 5) {
+								gameAudio = GameObject.Find ("Audio (Track 2)(Clone)");
+								print ("defined gameAudio");
+						}
+						if (currentLevel == 7) {
+								gameAudio = GameObject.Find ("Audio (Track 3)(Clone)");
+								print ("defined gameAudio");
+						}
+						if (currentLevel == 9) {
+								gameAudio = GameObject.Find ("Audio (Track 4)(Clone)");
+								print ("defined gameAudio");
+						}
+						if (currentLevel == 11) {
+								gameAudio = GameObject.Find ("Audio (Track 5)(Clone)");
+								print ("defined gameAudio");
+						}
+				}
+
 	
 				if (tutorialMode == false) {
 						if (hit2025FinishLine == false) {
@@ -144,6 +165,7 @@ public class Manager : MonoBehaviour
 										} else {
 												if (camera.GetComponent<MainCamera> ().movementSpeed <= 0.5) {
 														fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+
 												}
 										}
 								}
@@ -213,17 +235,6 @@ public class Manager : MonoBehaviour
 						}
 				}
 
-//				if (tutorialMode == false) {
-//						if (time >= secondsBetweenHealthChange) {
-//								ChangeHealth ();
-//								time = 0;
-//						}
-//				}
-		
-		
-				if (birds.Count == 1) {
-						flockAudio.SetActive (false);
-				}
 				if (birds.Count == 0) {
 						if (tutorialMode == false) {
 								//gameOver.SetActive (true);
@@ -505,6 +516,8 @@ public class Manager : MonoBehaviour
 				hit2025FinishLine = true;
 				print ("hit 2025 finish line");
 				if (timeReset == false) {
+						gameAudio.GetComponent<MusicAudio> ().FadeAudio ();
+
 						time = 0;
 						audio.PlayOneShot (success, 1);
 						timeReset = true;

@@ -13,10 +13,16 @@ public class MusicAudio : MonoBehaviour
 		public bool playTrack3;
 		public bool playTrack4;
 		public bool playTrack5;
+		public bool fadeAudio;
+		bool hasBeenTweened;
+		public GameObject audio;
+		public float audioFadeSpeed;
+
+	
 	
 		void Awake ()
 		{
-		
+				audio = this.gameObject;
 				DontDestroyOnLoad (this.gameObject);
 		}
 	
@@ -72,6 +78,17 @@ public class MusicAudio : MonoBehaviour
 				} else {
 						track5.audio.volume = 0;
 				}
+
+				if (fadeAudio == true) {
+						if (hasBeenTweened == false) {
+								iTween.AudioTo (track1, iTween.Hash ("volume", 0.0f, "pitch", 1.0f, "time", audioFadeSpeed, "oncomplete", "MuteAudio", "oncompletetarget", audio));
+								iTween.AudioTo (track2, iTween.Hash ("volume", 0.0f, "pitch", 1.0f, "time", audioFadeSpeed, "oncomplete", "MuteAudio", "oncompletetarget", audio));
+								iTween.AudioTo (track3, iTween.Hash ("volume", 0.0f, "pitch", 1.0f, "time", audioFadeSpeed, "oncomplete", "MuteAudio", "oncompletetarget", audio));
+								iTween.AudioTo (track4, iTween.Hash ("volume", 0.0f, "pitch", 1.0f, "time", audioFadeSpeed, "oncomplete", "MuteAudio", "oncompletetarget", audio));
+								iTween.AudioTo (track5, iTween.Hash ("volume", 0.0f, "pitch", 1.0f, "time", audioFadeSpeed, "oncomplete", "MuteAudio", "oncompletetarget", audio));
+								hasBeenTweened = true;
+						}
+				}
 		}
 	
 	
@@ -83,12 +100,15 @@ public class MusicAudio : MonoBehaviour
 				playTrack4 = false;
 				playTrack5 = false;
 		
-		
-				track1.audio.volume = 1;
+				if (fadeAudio == false) {
+						track1.audio.volume = 1;
+				}
 				track2.audio.volume = 0;
 				track3.audio.volume = 0;
 				track4.audio.volume = 0;
 				track5.audio.volume = 0;
+				print ("playtrack1 was triggered");
+
 		}
 	
 		public void PlayTrack2 ()
@@ -99,7 +119,9 @@ public class MusicAudio : MonoBehaviour
 				playTrack4 = false;
 				playTrack5 = false;
 				track1.audio.volume = 0;
-				track2.audio.volume = 1;
+				if (fadeAudio == false) {
+						track2.audio.volume = 1;
+				}
 				track3.audio.volume = 0;
 				track4.audio.volume = 0;
 				track5.audio.volume = 0;
@@ -115,7 +137,9 @@ public class MusicAudio : MonoBehaviour
 				playTrack5 = false;
 				track1.audio.volume = 0;
 				track2.audio.volume = 0;
-				track3.audio.volume = 1;
+				if (fadeAudio == false) {
+						track3.audio.volume = 1;
+				}
 				track4.audio.volume = 0;
 				track5.audio.volume = 0;
 		}
@@ -130,7 +154,9 @@ public class MusicAudio : MonoBehaviour
 				track1.audio.volume = 0;
 				track2.audio.volume = 0;
 				track3.audio.volume = 0;
-				track4.audio.volume = 1;
+				if (fadeAudio == false) {
+						track4.audio.volume = 1;
+				}
 				track5.audio.volume = 0;
 		}
 	
@@ -144,7 +170,24 @@ public class MusicAudio : MonoBehaviour
 				track1.audio.volume = 0;
 				track2.audio.volume = 0;
 				track3.audio.volume = 0;
-				track4.audio.volume = 1;
-				track5.audio.volume = 0;
+				track4.audio.volume = 0;
+				if (fadeAudio == false) {
+						track5.audio.volume = 1;
+				}
+		}
+	
+		public void MuteAudio ()
+		{
+//				print ("muted audio");
+//				track1.audio.volume = 0;
+//				track2.audio.volume = 0;
+//				track3.audio.volume = 0;
+//				track4.audio.volume = 0;
+//				track5.audio.volume = 0;
+		}
+
+		public void FadeAudio ()
+		{
+				fadeAudio = true;
 		}
 }

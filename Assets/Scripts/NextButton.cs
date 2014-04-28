@@ -8,6 +8,8 @@ public class NextButton : MonoBehaviour
 		public int levelToLoad;
 		public GameObject deselectedNextButton;
 		public GameObject selectedNextButton;
+		public AudioClip hover;
+
 
 		// Use this for initialization
 		void Start ()
@@ -36,5 +38,10 @@ public class NextButton : MonoBehaviour
 		{
 				selectedNextButton.gameObject.renderer.enabled = true;
 				deselectedNextButton.gameObject.renderer.enabled = false;
+		}
+
+		void OnMouseEnter ()
+		{
+				audio.PlayOneShot (hover, 1f);
 		}
 }
