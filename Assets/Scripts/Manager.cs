@@ -135,22 +135,7 @@ public class Manager : MonoBehaviour
 		void Update ()
 		{
 				if (gameAudio == null) {
-						if (currentLevel == 5) {
-								gameAudio = GameObject.Find ("Audio (Track 2)(Clone)");
-								print ("defined gameAudio");
-						}
-						if (currentLevel == 7) {
-								gameAudio = GameObject.Find ("Audio (Track 3)(Clone)");
-								print ("defined gameAudio");
-						}
-						if (currentLevel == 9) {
-								gameAudio = GameObject.Find ("Audio (Track 4)(Clone)");
-								print ("defined gameAudio");
-						}
-						if (currentLevel == 11) {
-								gameAudio = GameObject.Find ("Audio (Track 5)(Clone)");
-								print ("defined gameAudio");
-						}
+						gameAudio = GameObject.Find ("Audio");
 				}
 
 	

@@ -12,8 +12,8 @@ public class AudioController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				if (GameObject.Find ("Audio") == null) {
-//						Instantiate (gameAudio);
+				if ((GameObject.Find ("Audio") == null) || (GameObject.Find ("Audio (Track 2)(Clone)") == null) || (GameObject.Find ("Audio (Track3)(Clone)") == null) || (GameObject.Find ("Audio (Track4)(Clone)") == null) || (GameObject.Find ("Audio (Track5)(Clone)") == null)) {
+//						Instantiate (gameAudio);		
 						audio = GameObject.Find ("Audio(Clone)");
 
 				}

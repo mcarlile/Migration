@@ -1,12 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AudioController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NextButton.cs">
     <Files>
       <File FileName="Assets/Scripts/SceneFadeOutIn.cs" Line="63" Column="1" />
       <File FileName="Assets/Scripts/TutorialManager.cs" Line="369" Column="82" />
       <File FileName="Assets/Scripts/Manager.cs" Line="296" Column="46" />
       <File FileName="Assets/Scripts/NextButton.cs" Line="9" Column="33" />
-      <File FileName="Assets/Scripts/AudioController.cs" Line="23" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
