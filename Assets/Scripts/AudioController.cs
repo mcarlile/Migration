@@ -13,7 +13,7 @@ public class AudioController : MonoBehaviour
 		void Start ()
 		{
 				if (GameObject.Find ("Audio") == null) {
-						Instantiate (gameAudio);
+//						Instantiate (gameAudio);
 						audio = GameObject.Find ("Audio(Clone)");
 
 				}

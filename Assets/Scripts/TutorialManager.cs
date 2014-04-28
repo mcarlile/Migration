@@ -153,7 +153,6 @@ public class TutorialManager : MonoBehaviour
 						float waitTextTime = respawnTimeAfterDeath - waitTimer;
 						respawnText.text = ("respawn in " + waitTextTime.ToString ("F0"));
 						if (waitTimer >= respawnTimeAfterDeath) {
-								print ("newlevelshouldappear");
 								Application.LoadLevel (0);
 						}
 				}
@@ -178,7 +177,6 @@ public class TutorialManager : MonoBehaviour
 						&& (letter6.GetComponent<Letter> ().letterPosition == 8)
 						&& (letter7.GetComponent<Letter> ().letterPosition == 0)
 						&& (letter8.GetComponent<Letter> ().letterPosition == 7))) || (puzzleSolved == true))) {
-						print ("challenge complete");		
 						ChallengeComplete ();
 						tutorialBackground.GetComponent<TutorialBackground> ().canMove = true;
 						if (puzzleAudioHasPlayed == false) {
@@ -189,7 +187,6 @@ public class TutorialManager : MonoBehaviour
 				}
 
 				if (tutorialBackground.gameObject.transform.position.x > rightBounds.gameObject.transform.position.x) {
-						print ("challenge2complete");
 						StartCoroutine ("Challenge2Complete");
 						if (movementAudioHasPlayed == false) {
 								audio.PlayOneShot (success, 1);
@@ -228,10 +225,9 @@ public class TutorialManager : MonoBehaviour
 								}
 			
 						}
-						if ((time > 0.5f) && (hasBeenLerped2 == true)) {
+						if ((waitTimer > 0.5f) && (hasBeenLerped2 == true)) {
 								print ("should be skipping to next level");
-								Application.LoadLevel (2);
-								//fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (2);
 						}
 				}
 		}
@@ -335,7 +331,6 @@ public class TutorialManager : MonoBehaviour
 		public void MoveLetterToBack (Letter letter, int vacatedPosition)
 		//		public void MoveBirdToBack (int vacatedPosition)
 		{
-				print ("vacated position" + vacatedPosition);
 				if (vacatedPosition != getMiddle ()) {
 						iTween.MoveTo (newLetterInFront.gameObject, iTween.Hash ("path", iTweenPath.GetPath ("4to" + vacatedPosition), "easetype", iTween.EaseType.easeInOutSine, "time", 2f));
 				} else {
@@ -352,7 +347,6 @@ public class TutorialManager : MonoBehaviour
 		private IEnumerator ZoomOut (float zoomDistance)
 		{
 				float deltaT = 0;
-				print ("zoom out has been called");
 				zooming = true;
 				while (deltaT < zoomDuration) {
 						deltaT += Time.deltaTime;
@@ -387,7 +381,6 @@ public class TutorialManager : MonoBehaviour
 		private IEnumerator MoveCamera (Transform newCameraPosition)
 		{
 
-				print ("move camera has been called");
 				float deltaT = 0;
 		
 				moving = true;
@@ -402,7 +395,6 @@ public class TutorialManager : MonoBehaviour
 		private IEnumerator ScaleLetters ()
 		{
 		
-				print ("scaling has been called");
 				float deltaT = 0;
 		
 				scaling = true;
@@ -419,8 +411,7 @@ public class TutorialManager : MonoBehaviour
 
 		private IEnumerator FadeIn (float fadeInDuration)
 		{
-				print ("fade in has been called");
-		
+
 				float deltaT = 0;
 		
 				fading = true;

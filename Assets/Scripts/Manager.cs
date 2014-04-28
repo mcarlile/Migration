@@ -181,6 +181,8 @@ public class Manager : MonoBehaviour
 								if (villageAudioHasPlayed == false) {
 										audio.PlayOneShot (success, 1);
 										villageAudioHasPlayed = true;
+										fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
+										print ("should have faded to next level");
 								}
 						}
 				}
@@ -292,6 +294,10 @@ public class Manager : MonoBehaviour
 		
 						if ((birdDiedOnCollision == true) && (timeReset == true) && (time > 4.0f)) {
 								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel);
+						}
+
+						if ((birdDiedOnCollision == false) && (timeReset == true) && (time > 4.0f)) {
+								fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (currentLevel + 1);
 						}
 				}
 
@@ -417,14 +423,12 @@ public class Manager : MonoBehaviour
 		{
 				birdDiedOnCollision = true;
 				narrativeManager.GetComponent<NarrativeManager> ().ShowCollissionMessage ();
-				//				audio.PlayOneShot (failure, 1);
-		
+
 		}
 
 		public void BirdDiedFromExhaustion ()
 		{
 				birdDiedFromExhaustion = true;
-//				birdDiedOnCollision = true;
 				print ("Bird died from exhaustion");
 
 		}

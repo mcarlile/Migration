@@ -107,7 +107,6 @@ public class MusicAudio : MonoBehaviour
 				track3.audio.volume = 0;
 				track4.audio.volume = 0;
 				track5.audio.volume = 0;
-				print ("playtrack1 was triggered");
 
 		}
 	
@@ -125,7 +124,6 @@ public class MusicAudio : MonoBehaviour
 				track3.audio.volume = 0;
 				track4.audio.volume = 0;
 				track5.audio.volume = 0;
-				print ("playtrack2 was triggered");
 		}
 	
 		public void PlayTrack3 ()

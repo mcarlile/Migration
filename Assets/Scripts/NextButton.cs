@@ -9,6 +9,8 @@ public class NextButton : MonoBehaviour
 		public GameObject deselectedNextButton;
 		public GameObject selectedNextButton;
 		public AudioClip hover;
+		public GameObject fadeBlack;
+		bool hasBeenFaded = false;
 
 
 		// Use this for initialization
@@ -20,6 +22,10 @@ public class NextButton : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+				if (hasBeenFaded == true) {
+						fadeBlack.GetComponent<SceneFadeOutIn> ().EndScene (levelToLoad);
+				}
+
 		
 		}
 	
@@ -30,7 +36,7 @@ public class NextButton : MonoBehaviour
 
 				print ("over the pause button");
 				if ((Input.GetMouseButtonDown (0))) {
-						Application.LoadLevel (levelToLoad);
+						hasBeenFaded = true;
 				}
 		}
 
