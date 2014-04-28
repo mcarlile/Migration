@@ -141,6 +141,7 @@ public class Manager : MonoBehaviour
 				if (tutorialMode == false) {
 						if (hit2025FinishLine == false) {
 								if ((background.gameObject.transform.position.y <= slowDownPoint.gameObject.transform.position.y)) {
+										StopDecrementingHealth ();
 										if (hasBeenLerped != true) {
 												if (!slowing) {
 														StartCoroutine ("SlowBackground");
@@ -449,6 +450,37 @@ public class Manager : MonoBehaviour
 		}
 
 		public void DisableBirdsToBeClicked ()
+		{
+				if (bird0 != null) {
+						bird0.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird1 != null) {
+						bird1.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird2 != null) {
+						bird2.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird3 != null) {
+						bird3.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird4 != null) {
+						bird4.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird5 != null) {
+						bird5.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird6 != null) {
+						bird6.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird7 != null) {
+						bird7.GetComponent<Bird> ().DisableClick ();
+				}
+				if (bird8 != null) {
+						bird8.GetComponent<Bird> ().DisableClick ();
+				}
+		}
+
+		public void StopDecrementingHealth ()
 		{
 				if (bird0 != null) {
 						bird0.GetComponent<Bird> ().DisableClick ();

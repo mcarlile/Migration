@@ -30,6 +30,7 @@ public class Bird : MonoBehaviour
 		public int position4HealthChangeMultiplier = 20;
 		public List<AudioClip> startledSounds = new List<AudioClip> ();
 		public AudioClip hover;
+		public bool stopDecrementingHealth = false;
 
 	
 		// Use this for initialization
@@ -43,43 +44,45 @@ public class Bird : MonoBehaviour
 		void Update ()
 		{
 				if (manager.GetComponent<Manager> ().avoidanceLevel == false) {
-						if (birdPosition == 4) {
-								health = (health - ((Time.deltaTime) * position4HealthChangeMultiplier));
-						}
-
-						if (((birdPosition == 3) || (birdPosition == 5))) {
-								if (health < 100) {
-										health = (health + ((Time.deltaTime) * position3HealthChangeMultiplier));
+						if (stopDecrementingHealth == false) {
+								if (birdPosition == 4) {
+										health = (health - ((Time.deltaTime) * position4HealthChangeMultiplier));
 								}
-						}
 
-						if (((birdPosition == 2) || (birdPosition == 6))) {
-								if (health < 100) {
-
-										health = (health + ((Time.deltaTime) * position2HealthChangeMultiplier));
+								if (((birdPosition == 3) || (birdPosition == 5))) {
+										if (health < 100) {
+												health = (health + ((Time.deltaTime) * position3HealthChangeMultiplier));
+										}
 								}
-						}
 
-						if (((birdPosition == 1) || (birdPosition == 7))) {
-								if (health < 100) {
+								if (((birdPosition == 2) || (birdPosition == 6))) {
+										if (health < 100) {
 
-										health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+												health = (health + ((Time.deltaTime) * position2HealthChangeMultiplier));
+										}
 								}
-						}
 
-						if (((birdPosition == 0) || (birdPosition == 8))) {
-								if (health < 100) {
+								if (((birdPosition == 1) || (birdPosition == 7))) {
+										if (health < 100) {
 
-										health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+												health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+										}
 								}
-						}
+
+								if (((birdPosition == 0) || (birdPosition == 8))) {
+										if (health < 100) {
+
+												health = (health + ((Time.deltaTime) * position1HealthChangeMultiplier));
+										}
+								}
 		
-						if (health <= 0) {
-								SendDeathData ();
-								Destroy (gameObject);
-								if (tutorialMode == true) {
-										narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
-										manager.GetComponent<Manager> ().BirdDiedFromExhaustion ();
+								if (health <= 0) {
+										SendDeathData ();
+										Destroy (gameObject);
+										if (tutorialMode == true) {
+												narrativeManager.GetComponent<NarrativeManager> ().ShowDeathMessage ();
+												manager.GetComponent<Manager> ().BirdDiedFromExhaustion ();
+										}
 								}
 						}
 				}
@@ -157,6 +160,11 @@ public class Bird : MonoBehaviour
 		public void DisableClick ()
 		{
 				allowClick = false;
+		}
+
+		public void StopHealthDrain ()
+		{
+				stopDecrementingHealth = true;
 		}
 
 }

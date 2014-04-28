@@ -17,7 +17,7 @@ public class CreditsManager : MonoBehaviour
 		void Update ()
 		{
 				if (camera.transform.position.y >= bottomBounds.transform.position.y) {
-						Application.Quit ();
+						Application.LoadLevel (0);
 				}
 		}
 }
