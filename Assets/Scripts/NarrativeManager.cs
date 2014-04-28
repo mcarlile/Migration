@@ -40,8 +40,6 @@ public class NarrativeManager : MonoBehaviour
 		public void ShowDeathMessage ()
 		{
 				NarrativeText.text = text4;
-				audio.PlayOneShot (failure, 1);
-				print ("failure should have played");
 
 
 		}
@@ -49,8 +47,7 @@ public class NarrativeManager : MonoBehaviour
 		public void ShowCollissionMessage ()
 		{
 				NarrativeText.text = text5;
-				audio.PlayOneShot (failure, 1);
-				print ("failure should have played");
+
 
 		}
 

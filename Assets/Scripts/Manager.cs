@@ -55,7 +55,6 @@ public class Manager : MonoBehaviour
 		public bool needsFadeToBlack;
 		public GameObject fadeBlack;
 		public bool fadeFromBlack;
-		public AudioClip failure;
 		public AudioClip success;
 		public bool allowClickHasBeenTriggered = false;
 		public bool villageAudioHasPlayed = false;
@@ -172,7 +171,7 @@ public class Manager : MonoBehaviour
 						}
 				}
 		
-				if ((startHealthDecrement == false) && (time > 5.0f)) {
+				if ((startHealthDecrement == false) && (time > 10.0f)) {
 						if (tutorialMode == true) {
 								narrativeManager.GetComponent<NarrativeManager> ().ClearMessages ();
 								startHealthDecrement = true;
